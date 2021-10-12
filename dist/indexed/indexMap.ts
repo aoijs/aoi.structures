@@ -128,4 +128,11 @@ class IndexData<K = string, V = Array<number>> {
     public get size() : number {
         return Object.keys( this.letters ).length;
     }
+    /**
+     * @method set
+     */
+    public set( letter : Character,indexes : number[]) : number[] {
+        this.letters[ letter ] = indexes;
+        return indexes;
+    }
 }

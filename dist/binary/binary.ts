@@ -11,7 +11,7 @@ class Byte {
         this.name = name;
         this.size = size;
         this.type = type;
-        this.data = type === 'text' ? [] : type === "number" ? (00) : type === "buffer" ? : undefined;
+        this.data = type === 'text' ? [] : type === "number" ? (00) : type === "buffer" ? new DataView( new ArrayBuffer( size ) ) : undefined;
     }
 }
 export default class Binary {
