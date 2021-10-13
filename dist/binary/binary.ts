@@ -1,7 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const byte_1 = require("./byte");
-class Binary {
+
+import Byte from './byte';
+
+export default class Binary {
+    size: number;
+    data: Record<string,Byte>;
     constructor(size = Infinity) {
         this.size = size;
         this.data = {};
@@ -14,8 +16,8 @@ class Binary {
      * @param size size of the Byte
      * @return Byte
      */
-    newByte(name, type, size) {
-        const newByte = new byte_1.default(name, type, size);
+    public newByte(name: string , type: 'string' | 'number' , size: number) {
+        const newByte = new Byte(name, type, size);
         this.data[name] = newByte;
         return newByte;
     }
@@ -23,13 +25,15 @@ class Binary {
      * @method addByteData
      * @description adds data to that byte
      * @param name name of the byte
-     * @param data
+     * @param data 
      * @return data
      */
-    addByteData(name, data) {
+    public addByteData(name: string, data: string | number) {
         const byte = this.data[name];
-        //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
+      //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
+
         const type = byte.type;
+
         if (type === 'string' && typeof data === 'string') {
             byte.data = data.split('').map(x => x.charCodeAt(0).toString(2));
         }
@@ -40,25 +44,20 @@ class Binary {
     /**
      * getRawData
      */
-    getRawData(name) {
-        const { data, type } = this.data[name];
-        if (type === 'string')
-            return data;
-        else
-            return data[0];
+    public getRawData(name : string) {
+        const { data,type } = this.data[ name ];
+        if( type === 'string' ) return data;
+        else return data[ 0 ];
     }
     /**
      * getData
      */
-    getData(name) {
-        const byte = this.data[name];
+    public getData(name : string) {
+        const byte = this.data[ name ];
         const type = byte.type;
-        if (type === 'string') {
-            return byte.data.map(bin => String.fromCharCode(parseInt(bin, 2))).join("");
+        if( type === 'string' ) {
+            return byte.data.map(bin => String.fromCharCode(parseInt(bin, 2))).join("")
         }
-        else
-            return parseInt(byte.data[0], 2);
+        else return parseInt(byte.data[ 0 ],2);
     }
-}
-exports.default = Binary;
-//# sourceMappingURL=binary.js.map
+} 
