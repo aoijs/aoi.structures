@@ -5,7 +5,6 @@ const leaf_1 = require("./leaf");
 class Branch {
     constructor(name, tree) {
         this.name = name;
-        this.size = size;
         this.branches = new Map();
         this.leaves = new Map();
         Object.defineProperty(this, "tree", { value: tree });
@@ -39,11 +38,10 @@ class Branch {
      * @return void
      */
     clearLeaf(name) {
-        var _a;
         if (!this.leaves.has(name))
             throw new Error("Leaf With Name: " + name + " Doesn't Exist");
         else
-            this.leaves.set(name, new leaf_1.default(name, (_a = this.leaves.get(name)) === null || _a === void 0 ? void 0 : _a.size));
+            this.leaves.set(name, new leaf_1.default(name, this));
     }
     /**
      * @method clearBranch
@@ -52,11 +50,10 @@ class Branch {
      * @return void
      */
     clearBranch(name) {
-        var _a;
         if (!this.branches.has(name))
             throw new Error("Branch With Name: " + name + " Doesn't Exist");
         else
-            this.branches.set(name, new Branch(name, (_a = this.branches.get(name)) === null || _a === void 0 ? void 0 : _a.size));
+            this.branches.set(name, new Branch(name, this.tree));
     }
     /**
      * @method clearSelf

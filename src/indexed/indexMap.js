@@ -4,7 +4,7 @@ class IndexData {
         Object.defineProperty(this, 'letters', { value: {} });
         Object.defineProperty(this, 'length', { value: wordArray.length });
         wordArray.forEach((x, y) => {
-            const LetterIndexes = this.letter[x];
+            let LetterIndexes = this.letters[x];
             if (LetterIndexes) {
                 LetterIndexes.push(y);
             }
@@ -31,7 +31,7 @@ class IndexData {
      * @return boolean
      */
     add(letter) {
-        const LetterPlaces = this.letters[letter];
+        let LetterPlaces = this.letters[letter];
         if (!LetterPlaces)
             LetterPlaces = [this.length];
         else

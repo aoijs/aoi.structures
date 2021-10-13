@@ -8,7 +8,12 @@ class Group extends Map {
      * @return V
      */
     find(func) {
-        return this.allValues().find(func);
+        for (const [key, value] of this) {
+            if (func(value, key, this)) {
+                return value;
+                break;
+            }
+        }
     }
     /**
      * @method filterArray
@@ -40,15 +45,14 @@ class Group extends Map {
      */
     sortViaKeys() {
         const entries = [...this.entries()];
-        if (entries.every(x => typeof x[0] === 'string')) {
-            return new Group(entries.sort());
-        }
-        else if (entries.every(x => typeof x[0] === number)) {
-            return new Group(entries.sort((a, b) => a[0] - b[0]));
-        }
-        else {
-            return new Group(entries.sort());
-        }
+        return new Group(entries.sort((a, b) => {
+            if (a[0] < b[0])
+                return 1;
+            else if (a[0] > b[0])
+                return -1;
+            else
+                return 0;
+        }));
     }
     /**
      * @method weakSort
@@ -94,7 +98,7 @@ class Group extends Map {
      */
     sort(compareFunction) {
         const entries = [...this.entries()];
-        const sorted = entries.sort((a, b) => compare(a[1], b[1]));
+        const sorted = entries.sort((a, b) => compareFunction(a[1], b[1]));
         return new Group(sorted);
     }
     /**
@@ -106,7 +110,7 @@ class Group extends Map {
     object() {
         const obj = {};
         for (const [key, value] of this) {
-            obj[key] = value;
+            obj[`${key}`] = value;
         }
         return obj;
     }
@@ -230,8 +234,13 @@ class Group extends Map {
      * @return Group<any,any>
      */
     concat(...grps) {
-        const res = grps.map(x => [...x.entries()]);
-        return new Group(res);
+        const grp = new Group();
+        const res = grps.map(x => {
+            for (const [key, value] of this) {
+                grp.set(key, value);
+            }
+        });
+        return grp;
     }
     /**
      * @method some
@@ -308,8 +317,9 @@ class Group extends Map {
      * @return V | void
      */
     binarySearch(value, valueProp, sort = true) {
+        const vals = this.allValues();
         if (sort) {
-            const vals = this.allValues.sort((a, b) => {
+            vals.sort((a, b) => {
                 if (a < b)
                     return 1;
                 else if (a > b)
@@ -325,7 +335,7 @@ class Group extends Map {
             let val;
             while (start <= end) {
                 const mid = Math.floor((start + end) / 2);
-                const vm = eval(valueProp ? `vals[ mid ]?.${valueProp}` : vals[mid]);
+                const vm = eval(valueProp ? `vals[ mid ]?.${valueProp}` : `vals[mid]`);
                 if (search > vm)
                     start = mid + 1;
                 else if (search < vm)
@@ -340,7 +350,7 @@ class Group extends Map {
             }
             return val;
         };
-        return fn(v);
+        return fn(value);
     }
     /**
      * @method clone

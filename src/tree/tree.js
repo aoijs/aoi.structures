@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Branch = require("./branch.ts");
+const branch_1 = require("./branch");
 class Tree {
     constructor(name, age = Infinity) {
         this.name = name;
@@ -15,7 +15,7 @@ class Tree {
      * @return Branch
      */
     addBranch(name, size = Infinity) {
-        const newBranch = new Branch(name, size, this);
+        const newBranch = new branch_1.default(name, this);
         this.branches.set(name, newBranch);
         return newBranch;
     }

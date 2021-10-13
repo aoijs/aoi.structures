@@ -1,4 +1,4 @@
 node_modules
 tsConfig.json
-index.mjs
+index.js
 package-lock.json

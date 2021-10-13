@@ -13,6 +13,8 @@
     "url": "https://github.com/USERSATOSHI/Structures/issues"
   },
   "module": "commonjs",
+  "type": "commonjs",
+  "main": "index.js",
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
   "devDependencies": {

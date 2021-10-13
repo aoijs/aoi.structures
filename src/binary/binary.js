@@ -5,7 +5,7 @@ class Byte {
         this.name = name;
         this.size = size;
         this.type = type;
-        this.data = type === 'text' ? [] : type === "number" ? (00) : type === "buffer" ? new DataView(new ArrayBuffer(size)) : undefined;
+        this.data = type === 'text' ? [] : type === "number" ? '00' : type === "buffer" ? new DataView(new ArrayBuffer(size)) : [];
     }
 }
 class Binary {
@@ -40,7 +40,7 @@ class Binary {
         const type = byte.type;
         if (typeof data !== type)
             throw new Error("Data Provided Is not Of Same Type");
-        if (type === 'string') {
+        if (type === 'string' && typeof data === 'string') {
             byte.data = data.split('').map(x => x.charCodeAt(0).toString(2));
         }
         else if (type === 'data') {
