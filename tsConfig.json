@@ -19,6 +19,10 @@
         "listFiles": false,
         "noEmitHelpers": true
     },
+    "typedocOptions": {
+        "entryPoints": ["dist"],
+        "out": "docs"
+    },
     "exclude": [
         "node_modules"
     ],
