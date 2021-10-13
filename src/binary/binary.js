@@ -5,7 +5,7 @@ class Byte {
         this.name = name;
         this.size = size;
         this.type = type;
-        this.data = type === 'text' ? [] : type === "number" ? '00' : type === "buffer" ? new DataView(new ArrayBuffer(size)) : [];
+        this.data = type === 'string' ? [] : type === "number" ? ['00'] : [];
     }
 }
 class Binary {
@@ -35,20 +35,36 @@ class Binary {
      */
     addByteData(name, data, bufferMethod) {
         const byte = this.data[name];
-        if (!byte)
-            throw new Error("Byte With Name:" + name + " Doesn't Exist!");
+        //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
         const type = byte.type;
-        if (typeof data !== type)
-            throw new Error("Data Provided Is not Of Same Type");
         if (type === 'string' && typeof data === 'string') {
             byte.data = data.split('').map(x => x.charCodeAt(0).toString(2));
         }
-        else if (type === 'data') {
-            byte.data = Number(data).toString(2);
+        else if (type === 'number') {
+            byte.data = [Number(data).toString(2)];
         }
-        else {
-            byte.data.setInt32(bufferMethod.offset, data);
+    }
+    /**
+     * getRawData
+     */
+    getRawData(name) {
+        const { data, type } = this.data[name];
+        if (type === 'string')
+            return data;
+        else
+            return data[0];
+    }
+    /**
+     * getData
+     */
+    getData(name) {
+        const byte = this.data[name];
+        const type = byte.type;
+        if (type === 'string') {
+            return byte.data.map(bin => String.fromCharCode(parseInt(bin, 2))).join("");
         }
+        else
+            return parseInt(byte.data[0], 2);
     }
 }
 exports.default = Binary;

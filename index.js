@@ -1,6 +1,7 @@
-const IndexData = require('./src/indexed/indexMap.js').default;
+const Binary = require('./src/binary/binary').default;
 
-const id = new IndexData('Hello World!')
-id.add('t');
-id.set('q',[4,6,7]);
-console.log({ id,string: id.toString() })
+const b = new Binary(10);
+b.newByte('testByte', "number", 64);
+b.addByteData('testByte', 1234)
+
+console.log({ b, getRawData: b.getRawData("testByte"), getData: b.getData('testByte') })

@@ -37,11 +37,11 @@ class IndexData {
     add(letter) {
         let LetterPlaces = this.letters[letter];
         if (!LetterPlaces)
-            LetterPlaces = [this.length];
+            this.letters[letter] = [this.length];
         else
-            LetterPlaces.push(this.length);
+            this.letters[letter].push(this.length);
         this.length += 1;
-        return LetterPlaces;
+        return this.letters[letter];
     }
     /**
      * @method remove
@@ -128,14 +128,16 @@ class IndexData {
      * @method set
      */
     set(letter, indexes) {
-        this.letters[letter] = indexes;
-        for (const [key, values] of this.entries()) {
-            values.forEach((x, y) => {
-                if (indexes.includes(x)) {
-                    values.splice(y, 1);
+        for (let [key, values] of this.entries()) {
+            const res = [];
+            values.forEach((x) => {
+                if (!indexes.includes(x)) {
+                    res.push(x);
                 }
             });
+            this.letters[key] = res;
         }
+        this.letters[letter] = indexes;
         this.length = this.values().map(x => x.length).reduce((a, b) => a + b);
         return indexes;
     }

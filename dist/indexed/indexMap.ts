@@ -1,7 +1,7 @@
 type Character = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
 
 export default class IndexData<K = string, V = Array<number>> {
-    letters: Record<Character, Array<number>>;
+    letters: Record<Character | string, Array<number>>;
     length: number;
 
     constructor(word: string) {
@@ -42,10 +42,10 @@ export default class IndexData<K = string, V = Array<number>> {
      */
     public add(letter: Character): number[] {
         let LetterPlaces = this.letters[letter];
-        if (!LetterPlaces) LetterPlaces = [this.length];
-        else LetterPlaces.push(this.length);
+        if (!LetterPlaces) this.letters[ letter ] = [this.length];
+        else this.letters[ letter ].push(this.length);
         this.length += 1
-        return LetterPlaces;
+        return this.letters[ letter ];
     }
     /**
      * @method remove
@@ -71,8 +71,8 @@ export default class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n) | worst : O(n)
      * @return [string,number[]][]
      */
-    public entries(): [string, number[]][] {
-        return Object.entries(this.letters)
+    public entries() {
+        return Object.entries( this.letters )
     }
     /**
      * @method toString
@@ -134,14 +134,18 @@ export default class IndexData<K = string, V = Array<number>> {
      * @method set
      */
     public set(letter: Character, indexes: number[]): number[] {
-        this.letters[letter] = indexes;
-        for (const [key, values] of this.entries()) {
-            values.forEach((x, y) => {
-                if (indexes.includes(x)) {
-                    values.splice(y, 1);
+        
+        for (let [key, values] of this.entries()) {
+            const res : number[]= [];
+
+            values.forEach((x) => {
+                if (!indexes.includes(x)) {
+                    res.push(x);
                 }
             });
+            this.letters[ key ]  = res
         }
+        this.letters[letter] = indexes;
         this.length = this.values().map(x => x.length).reduce((a, b) => a + b)
         return indexes;
     }
