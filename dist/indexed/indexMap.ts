@@ -70,7 +70,7 @@ class IndexData<K = string, V = Array<number>> {
      * @return [string,number[]][]
      */
     public entries(): [string, number[]][] {
-        return Object.entries
+        return Object.entries( this.letters )
     }
     /**
      * @method toString
