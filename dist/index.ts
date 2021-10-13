@@ -1,6 +1,4 @@
-import Group from "./group/group";
-import IndexData from "./indexed/indexMap";
-import Binary from "./binary/binary";
-import Tree from "./tree/tree";
-
-export default { Group, IndexData, Binary, Tree }
+export  * as Binary from './binary/binary'
+export  * as Group from './group/group'
+export  * as IndexData from 'dist/indexed/indexMap'
+export  * as Tree from './tree/tree'
