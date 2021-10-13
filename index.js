@@ -1,8 +1,6 @@
-const Group = require('./src/group/group.js').default;
+const IndexData = require('./src/indexed/indexMap.js').default;
 
-const grp = new Group()
-grp.set(Map, Object)
-grp.set('ok', 'yeah')
-grp.set('bye', 'asf')
-
-console.log({grp,weakSort: grp.weakSort().allValues(),json: grp.toJSON() })
+const id = new IndexData('Hello World!')
+id.add('t');
+id.set('q',[4,6,7]);
+console.log({ id,string: id.toString() })

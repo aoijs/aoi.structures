@@ -1,15 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class IndexData {
     constructor(word) {
         const wordArray = word.split('');
         Object.defineProperty(this, 'letters', { value: {} });
-        Object.defineProperty(this, 'length', { value: wordArray.length });
+        Object.defineProperty(this, 'length', { value: wordArray.length, writable: true });
         wordArray.forEach((x, y) => {
             let LetterIndexes = this.letters[x];
             if (LetterIndexes) {
                 LetterIndexes.push(y);
+                this.letters[x] = LetterIndexes;
             }
             else {
                 LetterIndexes = [y];
+                this.letters[x] = LetterIndexes;
             }
         });
     }
@@ -125,7 +129,22 @@ class IndexData {
      */
     set(letter, indexes) {
         this.letters[letter] = indexes;
+        for (const [key, values] of this.entries()) {
+            values.forEach((x, y) => {
+                if (indexes.includes(x)) {
+                    values.splice(y, 1);
+                }
+            });
+        }
+        this.length = this.values().map(x => x.length).reduce((a, b) => a + b);
         return indexes;
     }
+    /**
+     * values
+     */
+    values() {
+        return Object.values(this.letters);
+    }
 }
+exports.default = IndexData;
 //# sourceMappingURL=indexMap.js.map

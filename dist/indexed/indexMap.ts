@@ -1,6 +1,6 @@
 type Character = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
 
-class IndexData<K = string, V = Array<number>> {
+export default class IndexData<K = string, V = Array<number>> {
     letters: Record<Character, Array<number>>;
     length: number;
 
@@ -8,16 +8,18 @@ class IndexData<K = string, V = Array<number>> {
         const wordArray = word.split('');
 
         Object.defineProperty(this, 'letters', { value: {} });
-        Object.defineProperty(this, 'length', { value: wordArray.length });
+        Object.defineProperty(this, 'length', { value: wordArray.length, writable: true });
 
-        wordArray.forEach((x : Character, y) => {
+        wordArray.forEach((x: Character, y) => {
             let LetterIndexes = this.letters[x];
 
             if (LetterIndexes) {
                 LetterIndexes.push(y);
+                this.letters[x] = LetterIndexes
             }
             else {
                 LetterIndexes = [y];
+                this.letters[x] = LetterIndexes
             }
         });
     }
@@ -70,7 +72,7 @@ class IndexData<K = string, V = Array<number>> {
      * @return [string,number[]][]
      */
     public entries(): [string, number[]][] {
-        return Object.entries( this.letters )
+        return Object.entries(this.letters)
     }
     /**
      * @method toString
@@ -101,10 +103,10 @@ class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return U[]
      */
-    public map<U>( func : ( indexes : number[],letter :Character | string, Data : this ) => U ) : U[] {
+    public map<U>(func: (indexes: number[], letter: Character | string, Data: this) => U): U[] {
         const res = [];
-        for( const [ key ,value ] of this.entries() ) {
-            res.push( func(value,key,this) )
+        for (const [key, value] of this.entries()) {
+            res.push(func(value, key, this))
         }
         return res;
     }
@@ -114,9 +116,9 @@ class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return void
      */
-     public forEach( func : ( indexes : number[ ],letter : Character | string, Data : this ) => void ) : void {
-        for( const [ key ,value ] of this.entries() ) {
-        func(value,key,this);
+    public forEach(func: (indexes: number[], letter: Character | string, Data: this) => void): void {
+        for (const [key, value] of this.entries()) {
+            func(value, key, this);
         }
     }
     /**
@@ -125,14 +127,28 @@ class IndexData<K = string, V = Array<number>> {
      * @Complexity best : <=O(n) | worst : O(n)
      * @return number
      */
-    public get size() : number {
-        return Object.keys( this.letters ).length;
+    public get size(): number {
+        return Object.keys(this.letters).length;
     }
     /**
      * @method set
      */
-    public set( letter : Character,indexes : number[]) : number[] {
-        this.letters[ letter ] = indexes;
+    public set(letter: Character, indexes: number[]): number[] {
+        this.letters[letter] = indexes;
+        for (const [key, values] of this.entries()) {
+            values.forEach((x, y) => {
+                if (indexes.includes(x)) {
+                    values.splice(y, 1);
+                }
+            });
+        }
+        this.length = this.values().map(x => x.length).reduce((a, b) => a + b)
         return indexes;
+    }
+    /**
+     * values
+     */
+    public values(): Array<Array<number>> {
+        return Object.values(this.letters)
     }
 }
