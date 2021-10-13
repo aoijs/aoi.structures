@@ -1,0 +1,4 @@
+{
+"entryPoints":["dist"],
+"out":"docs"
+}
