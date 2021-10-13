@@ -1,4 +1,10 @@
 {
-"entryPoints":["dist"],
-"out":"docs"
+    "entryPoints": [
+        "dist/binary/binary.ts",
+        "dist/group/group.ts",
+        "dist/tree/tree.ts"
+    ],
+    "out": "docs",
+    "tsconfig": "tsconfig.json",
+    "entryPointStrategy": "resolve"
 }
