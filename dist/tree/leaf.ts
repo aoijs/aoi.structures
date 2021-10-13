@@ -1,5 +1,7 @@
 /** @format */
 
+import Branch from "./branch";
+
 export default class Leaf {
   name: string;
   data: any[];

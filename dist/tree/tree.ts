@@ -1,9 +1,10 @@
-import *  as Branch from './branch.ts';
-
+import  Branch from './branch';
+type K = string;
+type V = Branch;
 export default class Tree {
     name : string; 
     age : number;
-    branches : Map<K,V>;
+    branches : Map<K,V> ;
     constructor( name : string , age = Infinity ) {
         this.name = name;
         this.age = age;
@@ -17,7 +18,7 @@ export default class Tree {
      * @return Branch
      */
     public addBranch( name : string , size = Infinity ) : Branch {
-        const newBranch : Branch = new Branch( name,size,this );
+        const newBranch   = new Branch( name,this );
 
         this.branches.set( name,newBranch );
         return newBranch;

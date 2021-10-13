@@ -1,14 +1,15 @@
 /** @format */
 
 import Leaf from "./leaf";
-
+import Tree from "./tree";
+type K = string;
+type V = Leaf | Branch;
 export default class Branch {
   name: string;
-  branches: Map<K, V>;
-  leaves: Map<K, V>;
+  branches: Map<K,V>;
+  leaves: Map<K,V>;
   constructor(name: string, tree: Tree) {
     this.name = name;
-    this.size = size;
     this.branches = new Map();
     this.leaves = new Map();
     Object.defineProperty(this, "tree", { value: tree });
@@ -19,7 +20,7 @@ export default class Branch {
    * @param name name of the Branch
    * @return Branch
    */
-  public addBranch(name: string): Branch {
+  public addBranch(name: any): Branch {
     const newBranch: Branch = new Branch(name, this.tree);
 
     this.branches.set(name, newBranch);
@@ -31,7 +32,7 @@ export default class Branch {
    * @param name name of the Leaf
    * @return Leaf
    */
-  public addLeaf(name: string): Leaf {
+  public addLeaf(name: any): Leaf {
     const newLeaf: Leaf = new Leaf(name, this);
 
     this.leaves.set(name, newLeaf);
@@ -46,7 +47,7 @@ export default class Branch {
   public clearLeaf(name: string): void {
     if (!this.leaves.has(name))
       throw new Error("Leaf With Name: " + name + " Doesn't Exist");
-    else this.leaves.set(name, new Leaf(name, this.leaves.get(name)?.size));
+    else this.leaves.set(name, new Leaf(name, this));
   }
   /**
    * @method clearBranch
@@ -57,8 +58,7 @@ export default class Branch {
   public clearBranch(name: string): void {
     if (!this.branches.has(name))
       throw new Error("Branch With Name: " + name + " Doesn't Exist");
-    else
-      this.branches.set(name, new Branch(name, this.branches.get(name)?.size));
+    else this.branches.set(name, new Branch(name, this.tree));
   }
   /**
    * @method clearSelf
@@ -114,7 +114,7 @@ export default class Branch {
    * @readonly
    * @return Tree
    */
-  public get tree() {
+  public get tree() : Tree {
     return this.tree;
   }
 }

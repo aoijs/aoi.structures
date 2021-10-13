@@ -10,8 +10,8 @@ class IndexData<K = string, V = Array<number>> {
         Object.defineProperty(this, 'letters', { value: {} });
         Object.defineProperty(this, 'length', { value: wordArray.length });
 
-        wordArray.forEach((x, y) => {
-            const LetterIndexes = this.letter[x];
+        wordArray.forEach((x : Character, y) => {
+            let LetterIndexes = this.letters[x];
 
             if (LetterIndexes) {
                 LetterIndexes.push(y);
@@ -39,7 +39,7 @@ class IndexData<K = string, V = Array<number>> {
      * @return boolean
      */
     public add(letter: Character): number[] {
-        const LetterPlaces = this.letters[letter];
+        let LetterPlaces = this.letters[letter];
         if (!LetterPlaces) LetterPlaces = [this.length];
         else LetterPlaces.push(this.length);
         this.length += 1
@@ -70,7 +70,7 @@ class IndexData<K = string, V = Array<number>> {
      * @return [string,number[]][]
      */
     public entries(): [string, number[]][] {
-        return Object.entries(this.letters);
+        return Object.entries
     }
     /**
      * @method toString
@@ -101,9 +101,9 @@ class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return U[]
      */
-    public map<U>( func : ( indexes : V,letter : K, Data : IndexData ) => U ) : U[] {
+    public map<U>( func : ( indexes : number[],letter :Character | string, Data : this ) => U ) : U[] {
         const res = [];
-        for( const [ key,value ] of this.entries() ) {
+        for( const [ key ,value ] of this.entries() ) {
             res.push( func(value,key,this) )
         }
         return res;
@@ -114,8 +114,8 @@ class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return void
      */
-     public forEach( func : ( indexes : V,letter : K, Data : IndexData ) => void ) : void {
-        for( const [ key,value ] of this.entries() ) {
+     public forEach( func : ( indexes : number[ ],letter : Character | string, Data : this ) => void ) : void {
+        for( const [ key ,value ] of this.entries() ) {
         func(value,key,this);
         }
     }
