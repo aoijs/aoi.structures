@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Byte = void 0;
 class Byte {
     constructor(name, type, size) {
         this.name = name;
@@ -8,5 +9,5 @@ class Byte {
         this.data = type === 'string' ? [] : type === "number" ? ['00'] : [];
     }
 }
-exports.default = Byte;
+exports.Byte = Byte;
 //# sourceMappingURL=byte.js.map

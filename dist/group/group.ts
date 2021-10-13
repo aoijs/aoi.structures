@@ -1,4 +1,4 @@
-export default class Group<K = any, V = any> extends Map<K, V> {
+export class Group<K = any, V = any> extends Map<K, V> {
     /**
      * @method find
      * @similiar Array.find

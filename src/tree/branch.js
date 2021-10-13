@@ -1,6 +1,7 @@
 "use strict";
 /** @format */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Branch = void 0;
 const leaf_1 = require("./leaf");
 class Branch {
     constructor(name, tree) {
@@ -27,7 +28,7 @@ class Branch {
      * @return Leaf
      */
     addLeaf(name) {
-        const newLeaf = new leaf_1.default(name, this);
+        const newLeaf = new leaf_1.Leaf(name, this);
         this.leaves.set(name, newLeaf);
         return newLeaf;
     }
@@ -41,7 +42,7 @@ class Branch {
         if (!this.leaves.has(name))
             throw new Error("Leaf With Name: " + name + " Doesn't Exist");
         else
-            this.leaves.set(name, new leaf_1.default(name, this));
+            this.leaves.set(name, new leaf_1.Leaf(name, this));
     }
     /**
      * @method clearBranch
@@ -115,5 +116,5 @@ class Branch {
         return this.tree;
     }
 }
-exports.default = Branch;
+exports.Branch = Branch;
 //# sourceMappingURL=branch.js.map

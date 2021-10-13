@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.IndexData = void 0;
 class IndexData {
     constructor(word) {
         const wordArray = word.split('');
@@ -148,5 +149,5 @@ class IndexData {
         return Object.values(this.letters);
     }
 }
-exports.default = IndexData;
+exports.IndexData = IndexData;
 //# sourceMappingURL=indexMap.js.map

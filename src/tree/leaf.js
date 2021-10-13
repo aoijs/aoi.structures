@@ -1,6 +1,7 @@
 "use strict";
 /** @format */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Leaf = void 0;
 class Leaf {
     constructor(name, branch) {
         this.name = name;
@@ -103,5 +104,5 @@ class Leaf {
         return vm;
     }
 }
-exports.default = Leaf;
+exports.Leaf = Leaf;
 //# sourceMappingURL=leaf.js.map

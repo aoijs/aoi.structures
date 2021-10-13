@@ -1,4 +1,4 @@
-export default class Byte {
+export class Byte {
     name: string;
     size: number;
     data:   Array<string>  ;

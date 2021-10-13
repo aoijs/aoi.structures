@@ -1,9 +1,9 @@
 
-import Byte from './byte';
+import { Byte } from './byte';
 
-export default class Binary {
+export class Binary {
     size: number;
-    data: Record<string,Byte>;
+    data: Record<string, Byte>;
     constructor(size = Infinity) {
         this.size = size;
         this.data = {};
@@ -16,7 +16,7 @@ export default class Binary {
      * @param size size of the Byte
      * @return Byte
      */
-    public newByte(name: string , type: 'string' | 'number' , size: number) {
+    public newByte(name: string, type: 'string' | 'number', size: number) {
         const newByte = new Byte(name, type, size);
         this.data[name] = newByte;
         return newByte;
@@ -30,7 +30,7 @@ export default class Binary {
      */
     public addByteData(name: string, data: string | number) {
         const byte = this.data[name];
-      //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
+        //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
 
         const type = byte.type;
 
@@ -44,20 +44,20 @@ export default class Binary {
     /**
      * getRawData
      */
-    public getRawData(name : string) {
-        const { data,type } = this.data[ name ];
-        if( type === 'string' ) return data;
-        else return data[ 0 ];
+    public getRawData(name: string) {
+        const { data, type } = this.data[name];
+        if (type === 'string') return data;
+        else return data[0];
     }
     /**
      * getData
      */
-    public getData(name : string) {
-        const byte = this.data[ name ];
+    public getData(name: string) {
+        const byte = this.data[name];
         const type = byte.type;
-        if( type === 'string' ) {
+        if (type === 'string') {
             return byte.data.map(bin => String.fromCharCode(parseInt(bin, 2))).join("")
         }
-        else return parseInt(byte.data[ 0 ],2);
+        else return parseInt(byte.data[0], 2);
     }
 } 

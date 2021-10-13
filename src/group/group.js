@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Group = void 0;
 class Group extends Map {
     /**
      * @method find
@@ -362,5 +363,5 @@ class Group extends Map {
         return new Group(grp);
     }
 }
-exports.default = Group;
+exports.Group = Group;
 //# sourceMappingURL=group.js.map

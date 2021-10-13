@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Binary = void 0;
 const byte_1 = require("./byte");
 class Binary {
     constructor(size = Infinity) {
@@ -15,7 +16,7 @@ class Binary {
      * @return Byte
      */
     newByte(name, type, size) {
-        const newByte = new byte_1.default(name, type, size);
+        const newByte = new byte_1.Byte(name, type, size);
         this.data[name] = newByte;
         return newByte;
     }
@@ -60,5 +61,5 @@ class Binary {
             return parseInt(byte.data[0], 2);
     }
 }
-exports.default = Binary;
+exports.Binary = Binary;
 //# sourceMappingURL=binary.js.map
