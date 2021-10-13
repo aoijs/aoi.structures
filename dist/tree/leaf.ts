@@ -79,4 +79,27 @@ export default class Leaf {
   ): U[] {
     return this.data.map(func, thisArg);
   }
+  public searchValue( value : string | number,sort  = true ) : any {
+    if( sort ) {
+      this.data = this.data.sort( (a,b) => {
+        if( a < b ) return 1
+        else if( a > b ) return -1
+        else return 0
+      });
+    }
+
+    
+    let start = 0;
+    let end = this.data.length - 1;
+    let vm;
+
+    while( start <= end ) {
+      let mid = Math.floor( (start + end)/2 );
+      vm = this.data[ mid ]
+      if( value > vm ) start = mid + 1
+      else if( value < vm ) end = mid - 1
+      else break;
+    }
+    return vm
+  }
 }
