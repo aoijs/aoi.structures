@@ -6,8 +6,8 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @return V  
      */
     public find(func: (value: V, key: K, grp: this) => boolean): V {
-        for (const [key,value] of this) {
-            if( func( value,key,this ) ) {
+        for (const [key, value] of this) {
+            if (func(value, key, this)) {
                 return value;
                 break;
             }
@@ -43,11 +43,11 @@ export class Group<K = any, V = any> extends Map<K, V> {
      */
     public sortViaKeys(): Group<K, V> {
         const entries = [...this.entries()];
-        return new Group(entries.sort( (a,b) =>{
-            if( a[0] < b[0] ) return 1
-            else if( a[0] > b[0] ) return -1
+        return new Group(entries.sort((a, b) => {
+            if (a[0] < b[0]) return 1
+            else if (a[0] > b[0]) return -1
             else return 0
-        } ));
+        }));
     }
     /**
      * @method weakSort
@@ -102,9 +102,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @return Object 
      */
     public object(): object {
-        const obj : Record<string,any>= {};
+        const obj: Record<string, any> = {};
         for (const [key, value] of this) {
-            obj[ `${key}` ] = value
+            obj[`${key}`] = value
         }
         return obj
     }
@@ -226,11 +226,11 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param grps Array of Group
      * @return Group<any,any>
      */
-    public concat(...grps: Group[] ): Group<any, any> {
+    public concat(...grps: Group[]): Group<any, any> {
         const grp = new Group()
         const res = grps.map(x => {
-            for (const [key,value] of this) {
-                grp.set( key,value );
+            for (const [key, value] of this) {
+                grp.set(key, value);
             }
         });
         return grp;
@@ -310,7 +310,7 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param sort whether to sort the Group before Searching
      * @return V | void
      */
-    public binarySearch(value: string | number, valueProp : string, sort = true): V | void {
+    public binarySearch(value: string | number, valueProp?: string, sort = true): V | void {
         const vals = this.allValues();
 
         if (sort) {
@@ -321,7 +321,7 @@ export class Group<K = any, V = any> extends Map<K, V> {
             });
         }
 
-        const fn = ( search : string | number) => {
+        const fn = (search: string | number) => {
             let found = false;
             let start = 0;
             let end = vals.length - 1;
@@ -354,4 +354,116 @@ export class Group<K = any, V = any> extends Map<K, V> {
     public clone(grp: Group): Group {
         return new Group(grp);
     }
-} 
+    /**
+     * @method removeRandom
+     * @description removes a random Data from Group
+     * @return void
+     */
+    public removeRandom(): void {
+        const random = Math.floor(Math.random() * (this.size - 1));
+        const keys = this.allKeys();
+
+        this.delete(keys[random]);
+    }
+    /**
+     * @method map
+     * @description maps a function Over the Group
+     * @similiar Array.map()
+     * @param func Function to be mapped
+     * @return U[]
+     */
+    public map<U>(func: (val: V, key: K, grp: this) => U): U[] {
+        let res: U[] = [];
+        for (const [key, value] of this) {
+            res.push(func(value, key, this))
+        }
+        return res;
+    }
+    /**
+     * @method slice
+     * @description slice the Group and returns a copy of new Group
+     * @similiar Array.slice()
+     * @param from position of Data in Group to be sliced from. default is 1
+     * @param to position of Data  in Group to be sliced to.
+     * @return Group<K,V>
+     */
+    public slice(from = 1, to?: number): Group<K, V> {
+        return new Group([...this.entries()].slice((from - 1), (to - 1)));
+    }
+    /**
+     * @method pop
+     * @description removes the last data
+     * @similiar Array.pop()
+     * @return V
+     */
+    public pop(): V {
+        const keys = this.allKeys();
+        const data = this.get(keys[this.size - 1]);
+        this.delete(keys[this.size - 1]);
+        return data
+    }
+    /**
+     * @method shift
+     * @description removes the firt data
+     * @similiar Array.shfit()
+     * @return V
+     */
+    public shift(): V {
+        const keys = this.allKeys();
+        const data = this.get(keys[0]);
+        this.delete(keys[0]);
+        return data;
+    }
+    /**
+     * @method reduce
+     * @description reduces the data in Group returned by the function
+     * @similiar Array.reduce()
+     * @param func function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    public reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V) {
+        let pref = intVal;
+        for (const [key, value] of this) {
+            pref = func(pref, value, key, this);
+        }
+        return pref;
+    }
+    /**
+     * @method reduceRight
+     * @description reduces the data in Group returned by the function from right to left
+     * @similiar Array.reduceRight()
+     * @param func function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    public reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V) {
+        let pref = intVal;
+        for (const [key, value] of this.reverse()) {
+            pref = func(pref, value, key, this);
+        }
+        return pref;
+    }
+    /**
+     * @method reduceArray
+     * @description reduces the values in Group returned by the function
+     * @similiar Array.reduce()
+     * @param func ompareFunction function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    public reduceArray(func: (preVal: V, curVal: V, curIndex: K, array: V[]) => V, intVal?: V) {
+        return this.allValues().reduce(func, intVal)
+    }
+    /**
+     * @method reduceRightArray
+     * @description reduces the values in Group returned by the function
+     * @similiar Array.reduce()
+     * @param func ompareFunction function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    public reduceRightArray(func: (preVal: V, curVal: V, curIndex: K, array: V[]) => V, intVal?: V) {
+        return this.allValues().reduceRight(func, intVal)
+    }
+}
