@@ -458,12 +458,57 @@ export class Group<K = any, V = any> extends Map<K, V> {
     /**
      * @method reduceRightArray
      * @description reduces the values in Group returned by the function
-     * @similiar Array.reduce()
+     * @similiar Array.reduceRight()
      * @param func ompareFunction function to reduce the data
      * @param intVal intial data
      * @return V
      */
     public reduceRightArray(func: (preVal: V, curVal: V, curIndex: K, array: V[]) => V, intVal?: V) {
         return this.allValues().reduceRight(func, intVal)
+    }
+    /**
+     * @method position
+     * @description returns position of the key in Group
+     * @similiar Array.indexOf()
+     * @param key Key in the Group
+     * @return number
+     */
+    public position(key: K): number {
+        return (this.allKeys().indexOf(key) + 1);
+    }
+    /**
+     * @method findPosition
+     * @description finds the position of the data in Group
+     * @similiar Array.findIndex()
+     * @param func function to find position
+     * @return number
+     */
+    public findPosition(func: (value: V, key: K, grp: this) => boolean) {
+        let i = 1;
+        let res = 0;
+        for (const [key, value] of this) {
+            if (func(value, key, this)) {
+                break;
+                res = i;
+            }
+            else i++
+        }
+        return res;
+    }
+    /**
+     * @method removeAlternate
+     * @description removes alternate data from Group
+     * @param offset offset the removal of first data
+     * @param alternate alternate gap
+     * @return void
+     */
+    public removeAlternate(offset = 0,alternate = 1) {
+        let i = offset;
+        const keys = this.allKeys();
+
+        while( i < this.size ) {
+            this.delete( keys[ i ] );
+            i =+ ( alternate + 1 )
+        }
     }
 }
