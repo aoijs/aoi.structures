@@ -285,7 +285,7 @@ export class Group<K = any, V = any> extends Map<K, V> {
         const oldSize = this.size;
 
         for (const [key, value] of this) {
-            if (value, key, this) this.delete(key);
+            if (func(value, key, this)) this.delete(key);
         }
 
         return (this.size - oldSize);
@@ -452,7 +452,7 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduceArray(func: (preVal: V, curVal: V, curIndex: K, array: V[]) => V, intVal?: V) {
+    public reduceArray(func: (preVal: V, curVal: V, curIndex: number, array: V[]) => V, intVal?: V) {
         return this.allValues().reduce(func, intVal)
     }
     /**
@@ -463,7 +463,7 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduceRightArray(func: (preVal: V, curVal: V, curIndex: K, array: V[]) => V, intVal?: V) {
+    public reduceRightArray(func: (preVal: V, curVal: V, curIndex: number, array: V[]) => V, intVal?: V) {
         return this.allValues().reduceRight(func, intVal)
     }
     /**
@@ -502,13 +502,13 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param alternate alternate gap
      * @return void
      */
-    public removeAlternate(offset = 0,alternate = 1) {
+    public removeAlternate(offset = 0, alternate = 1) {
         let i = offset;
         const keys = this.allKeys();
 
-        while( i < this.size ) {
-            this.delete( keys[ i ] );
-            i =+ ( alternate + 1 )
+        while (i < this.size) {
+            this.delete(keys[i]);
+            i = + (alternate + 1)
         }
     }
 }

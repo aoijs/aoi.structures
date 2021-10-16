@@ -292,7 +292,7 @@ class Group extends Map {
     remove(func) {
         const oldSize = this.size;
         for (const [key, value] of this) {
-            if (value, key, this)
+            if (func(value, key, this))
                 this.delete(key);
         }
         return (this.size - oldSize);
@@ -361,6 +361,162 @@ class Group extends Map {
     */
     clone(grp) {
         return new Group(grp);
+    }
+    /**
+     * @method removeRandom
+     * @description removes a random Data from Group
+     * @return void
+     */
+    removeRandom() {
+        const random = Math.floor(Math.random() * (this.size - 1));
+        const keys = this.allKeys();
+        this.delete(keys[random]);
+    }
+    /**
+     * @method map
+     * @description maps a function Over the Group
+     * @similiar Array.map()
+     * @param func Function to be mapped
+     * @return U[]
+     */
+    map(func) {
+        let res = [];
+        for (const [key, value] of this) {
+            res.push(func(value, key, this));
+        }
+        return res;
+    }
+    /**
+     * @method slice
+     * @description slice the Group and returns a copy of new Group
+     * @similiar Array.slice()
+     * @param from position of Data in Group to be sliced from. default is 1
+     * @param to position of Data  in Group to be sliced to.
+     * @return Group<K,V>
+     */
+    slice(from = 1, to) {
+        return new Group([...this.entries()].slice((from - 1), (to - 1)));
+    }
+    /**
+     * @method pop
+     * @description removes the last data
+     * @similiar Array.pop()
+     * @return V
+     */
+    pop() {
+        const keys = this.allKeys();
+        const data = this.get(keys[this.size - 1]);
+        this.delete(keys[this.size - 1]);
+        return data;
+    }
+    /**
+     * @method shift
+     * @description removes the firt data
+     * @similiar Array.shfit()
+     * @return V
+     */
+    shift() {
+        const keys = this.allKeys();
+        const data = this.get(keys[0]);
+        this.delete(keys[0]);
+        return data;
+    }
+    /**
+     * @method reduce
+     * @description reduces the data in Group returned by the function
+     * @similiar Array.reduce()
+     * @param func function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    reduce(func, intVal) {
+        let pref = intVal;
+        for (const [key, value] of this) {
+            pref = func(pref, value, key, this);
+        }
+        return pref;
+    }
+    /**
+     * @method reduceRight
+     * @description reduces the data in Group returned by the function from right to left
+     * @similiar Array.reduceRight()
+     * @param func function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    reduceRight(func, intVal) {
+        let pref = intVal;
+        for (const [key, value] of this.reverse()) {
+            pref = func(pref, value, key, this);
+        }
+        return pref;
+    }
+    /**
+     * @method reduceArray
+     * @description reduces the values in Group returned by the function
+     * @similiar Array.reduce()
+     * @param func ompareFunction function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    reduceArray(func, intVal) {
+        return this.allValues().reduce(func, intVal);
+    }
+    /**
+     * @method reduceRightArray
+     * @description reduces the values in Group returned by the function
+     * @similiar Array.reduceRight()
+     * @param func ompareFunction function to reduce the data
+     * @param intVal intial data
+     * @return V
+     */
+    reduceRightArray(func, intVal) {
+        return this.allValues().reduceRight(func, intVal);
+    }
+    /**
+     * @method position
+     * @description returns position of the key in Group
+     * @similiar Array.indexOf()
+     * @param key Key in the Group
+     * @return number
+     */
+    position(key) {
+        return (this.allKeys().indexOf(key) + 1);
+    }
+    /**
+     * @method findPosition
+     * @description finds the position of the data in Group
+     * @similiar Array.findIndex()
+     * @param func function to find position
+     * @return number
+     */
+    findPosition(func) {
+        let i = 1;
+        let res = 0;
+        for (const [key, value] of this) {
+            if (func(value, key, this)) {
+                break;
+                res = i;
+            }
+            else
+                i++;
+        }
+        return res;
+    }
+    /**
+     * @method removeAlternate
+     * @description removes alternate data from Group
+     * @param offset offset the removal of first data
+     * @param alternate alternate gap
+     * @return void
+     */
+    removeAlternate(offset = 0, alternate = 1) {
+        let i = offset;
+        const keys = this.allKeys();
+        while (i < this.size) {
+            this.delete(keys[i]);
+            i = +(alternate + 1);
+        }
     }
 }
 exports.Group = Group;
