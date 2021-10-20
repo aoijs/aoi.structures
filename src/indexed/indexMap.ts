@@ -42,10 +42,10 @@ export class IndexData<K = string, V = Array<number>> {
      */
     public add(letter: Character): number[] {
         let LetterPlaces = this.letters[letter];
-        if (!LetterPlaces) this.letters[ letter ] = [this.length];
-        else this.letters[ letter ].push(this.length);
+        if (!LetterPlaces) this.letters[letter] = [this.length];
+        else this.letters[letter].push(this.length);
         this.length += 1
-        return this.letters[ letter ];
+        return this.letters[letter];
     }
     /**
      * @method remove
@@ -72,7 +72,7 @@ export class IndexData<K = string, V = Array<number>> {
      * @return [string,number[]][]
      */
     public entries() {
-        return Object.entries( this.letters )
+        return Object.entries(this.letters)
     }
     /**
      * @method toString
@@ -134,16 +134,16 @@ export class IndexData<K = string, V = Array<number>> {
      * @method set
      */
     public set(letter: Character, indexes: number[]): number[] {
-        
+
         for (let [key, values] of this.entries()) {
-            const res : number[]= [];
+            const res: number[] = [];
 
             values.forEach((x) => {
                 if (!indexes.includes(x)) {
                     res.push(x);
                 }
             });
-            this.letters[ key ]  = res
+            this.letters[key] = res
         }
         this.letters[letter] = indexes;
         this.length = this.values().map(x => x.length).reduce((a, b) => a + b)
