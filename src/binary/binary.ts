@@ -44,7 +44,7 @@ export class Binary {
     /**
      * getRawData
      */
-    public getRawData(name: string) {
+    public getRawData(name: string): string | string[] {
         const { data, type } = this.data[name];
         if (type === 'string') return data;
         else return data[0];
@@ -52,7 +52,7 @@ export class Binary {
     /**
      * getData
      */
-    public getData(name: string) {
+    public getData(name: string): string | number {
         const byte = this.data[name];
         const type = byte.type;
         if (type === 'string') {
@@ -60,4 +60,4 @@ export class Binary {
         }
         else return parseInt(byte.data[0], 2);
     }
-} 
+}
