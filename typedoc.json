@@ -1,8 +1,11 @@
 {
     "entryPoints": [
-        "dist/binary/binary.ts",
-        "dist/group/group.ts",
-        "dist/tree/tree.ts"
+        "src/binary/binary.ts",
+        "src/binary/byte.ts",
+        "src/group/group.ts",
+        "src/tree/tree.ts",
+        "src/tree/branch.ts",
+        "src/tree/leaf.ts"
     ],
     "out": "docs",
     "tsconfig": "tsconfig.json",
