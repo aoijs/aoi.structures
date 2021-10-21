@@ -11,7 +11,9 @@ export class LinkedList {
         Object.defineProperty(this, '__lastNode__', { value: null, writable: true, enumerable: true })
     }
     /**
-     * add
+     * @method add
+     * @description adds an element to the list
+     * @param element element to be added in the list
      */
     public add(element: unknown) {
         const node = new Node(element);
@@ -73,7 +75,53 @@ export class LinkedList {
     /**
      * insertAt
      */
-    public insertAt() {
-        
+    public insertAt(index: number, element: unknown): void {
+        const node = new Node(element);
+
+        if (index < 0 || index > this.size) {
+            throw new Error("Index Can Only be from 0 to " + this.size);
+        }
+        else {
+            let curr = this.head;
+            let i = 0;
+            while (i < index) {
+                curr = curr.next;
+            }
+            curr.next = node;
+        }
+    }
+    /**
+     * isEmpty
+     */
+    public isEmpty() {
+        return this.head ? false : true;
+    }
+    /**
+     * map
+     */
+    public map<U>(func: (element: unknown, node: Node) => U): U[] {
+        let curr = this.head;
+        let res: U[] = [];
+
+        if (!curr) return res;
+        else {
+            while (curr) {
+                res.push(func(curr.element, curr));
+            }
+            return res;
+        }
+    }
+    /**
+     * forEach
+     */
+    public forEach<U>(func: (element: unknown, node: Node) => U): void {
+        let curr = this.head;
+
+        if (!curr) return;
+        else {
+            while (curr) {
+                func(curr.element, curr);
+            }
+        }
     }
 }
