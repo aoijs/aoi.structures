@@ -518,6 +518,19 @@ class Group extends Map {
             i = +(alternate + 1);
         }
     }
+    /**
+     * @method asyncMap
+     * @description map over the data asynchriously
+     * @param  {(val:V,key:K,grp:this)=>U} func function to be mapped
+     * @returns Promise
+     */
+    async asyncMap(func) {
+        const res = [];
+        for (const [key, value] of this) {
+            res.push(func(value, key, this));
+        }
+        return res;
+    }
 }
 exports.Group = Group;
 //# sourceMappingURL=group.js.map

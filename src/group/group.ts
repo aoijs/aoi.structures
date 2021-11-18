@@ -5,9 +5,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func Function to be passed for finding the value.
      * @return V  
      */
-    public find(func: (value: V, key: K, grp: this) => boolean): V {
-        for (const [key, value] of this) {
-            if (func(value, key, this)) {
+    public find ( func: ( value: V, key: K, grp: this ) => boolean ): V
+    {
+        for ( const [ key, value ] of this )
+        {
+            if ( func( value, key, this ) )
+            {
                 return value;
                 break;
             }
@@ -19,21 +22,24 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func Function to be passed for filtering data.
      * @return V[]
      */
-    public filterArray(func: (value: V) => boolean): V[] {
-        return this.allValues().filter(func);
+    public filterArray ( func: ( value: V ) => boolean ): V[]
+    {
+        return this.allValues().filter( func );
     }
     /**
      * @method allValues
      * @return V[]    */
-    public allValues(): V[] {
-        return [...this.values()];
+    public allValues (): V[]
+    {
+        return [ ...this.values() ];
     }
     /**
      * @method allKeys
      * @return K[]
      */
-    public allKeys(): K[] {
-        return [...this.keys()];
+    public allKeys (): K[]
+    {
+        return [ ...this.keys() ];
     }
     /**
      * @method sortViaKeys 
@@ -41,13 +47,15 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.sort() ( for string typed keys && any typed keys) and Array.sort((a,b) => a-b) (for number typed keys)
      * @return Group
      */
-    public sortViaKeys(): Group<K, V> {
-        const entries = [...this.entries()];
-        return new Group(entries.sort((a, b) => {
-            if (a[0] < b[0]) return 1
-            else if (a[0] > b[0]) return -1
-            else return 0
-        }));
+    public sortViaKeys (): Group<K, V>
+    {
+        const entries = [ ...this.entries() ];
+        return new Group( entries.sort( ( a, b ) =>
+        {
+            if ( a[ 0 ] < b[ 0 ] ) return 1;
+            else if ( a[ 0 ] > b[ 0 ] ) return -1;
+            else return 0;
+        } ) );
     }
     /**
      * @method weakSort
@@ -55,8 +63,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.sort()
      * @return Group
      */
-    public weakSort(): Group<K, V> {
-        return new Group([...this.entries()].sort());
+    public weakSort (): Group<K, V>
+    {
+        return new Group( [ ...this.entries() ].sort() );
     }
     /**
      * @method filter
@@ -65,10 +74,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func Function for filtering the Group
      * @return Group
      */
-    public filter(func: (value: V, key: K, grp: this) => boolean): Group<any, any> {
+    public filter ( func: ( value: V, key: K, grp: this ) => boolean ): Group<any, any>
+    {
         const g = new Group();
-        for (const [key, value] of this) {
-            if (func(value, key, this)) g.set(key, value)
+        for ( const [ key, value ] of this )
+        {
+            if ( func( value, key, this ) ) g.set( key, value );
         }
         return g;
     }
@@ -79,9 +90,10 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number how many top values to be returned
      * @return V | V[]
      */
-    public top(number = 1) {
-        const arr = this.allValues().slice(0, number);
-        return arr.length === 1 ? arr[0] : arr
+    public top ( number = 1 )
+    {
+        const arr = this.allValues().slice( 0, number );
+        return arr.length === 1 ? arr[ 0 ] : arr;
     }
     /**
      * @method sort
@@ -90,10 +102,11 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param compareFunction Function to sort
      * @return Group
      */
-    public sort(compareFunction: (a: V, b: V) => number): Group {
-        const entries = [...this.entries()];
-        const sorted = entries.sort((a, b) => compareFunction(a[1], b[1]));
-        return new Group(sorted);
+    public sort ( compareFunction: ( a: V, b: V ) => number ): Group
+    {
+        const entries = [ ...this.entries() ];
+        const sorted = entries.sort( ( a, b ) => compareFunction( a[ 1 ], b[ 1 ] ) );
+        return new Group( sorted );
     }
     /**
      * @method object
@@ -101,12 +114,14 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Object
      * @return Object 
      */
-    public object(): object {
+    public object (): object
+    {
         const obj: Record<string, any> = {};
-        for (const [key, value] of this) {
-            obj[`${key}`] = value
+        for ( const [ key, value ] of this )
+        {
+            obj[ `${ key }` ] = value;
         }
-        return obj
+        return obj;
     }
     /**
      * @method bottom
@@ -115,9 +130,10 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number number of values to be returned
      * @return V | V[]
      */
-    public bottom(number = 1): V | V[] {
-        const arr = this.allValues().slice(-number);
-        return arr.length === 1 ? arr[0] : arr;
+    public bottom ( number = 1 ): V | V[]
+    {
+        const arr = this.allValues().slice( -number );
+        return arr.length === 1 ? arr[ 0 ] : arr;
     }
     /**
      * @method topKey
@@ -126,9 +142,10 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number how many top keys to be returned
      * @return K | K[]
      */
-    public topKey(number = 1) {
-        const arr = this.allKeys().slice(0, number);
-        return arr.length === 1 ? arr[0] : arr
+    public topKey ( number = 1 )
+    {
+        const arr = this.allKeys().slice( 0, number );
+        return arr.length === 1 ? arr[ 0 ] : arr;
     }
     /**
      * @method bottomKey
@@ -137,9 +154,10 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number number of key to be returned
      * @return K | K[]
      */
-    public bottomKey(number = 1): K | K[] {
-        const arr = this.allKeys().slice(-number);
-        return arr.length === 1 ? arr[0] : arr;
+    public bottomKey ( number = 1 ): K | K[]
+    {
+        const arr = this.allKeys().slice( -number );
+        return arr.length === 1 ? arr[ 0 ] : arr;
     }
     /**
      * @method random
@@ -147,19 +165,23 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number number of random values to be returned
      * @return V | V[]
      */
-    public random(number = 1): V | V[] {
+    public random ( number = 1 ): V | V[]
+    {
         const vals = this.allValues();
-        if (number === 1) {
-            const random = Math.floor(Math.random() * vals.length - 1);
-            return vals[random];
+        if ( number === 1 )
+        {
+            const random = Math.floor( Math.random() * vals.length - 1 );
+            return vals[ random ];
         }
-        else {
+        else
+        {
             const res = [];
-            for (number; number > 0; number--) {
-                const random = Math.floor(Math.random() * vals.length - 1);
-                res.push(vals[random]);
+            for ( number; number > 0; number-- )
+            {
+                const random = Math.floor( Math.random() * vals.length - 1 );
+                res.push( vals[ random ] );
             }
-            return res
+            return res;
         }
     }
     /**
@@ -168,19 +190,23 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param number number of random keys to be returned
      * @return K | K[]
      */
-    public randomKey(number = 1): K | K[] {
+    public randomKey ( number = 1 ): K | K[]
+    {
         const vals = this.allKeys();
-        if (number === 1) {
-            const random = Math.floor(Math.random() * vals.length - 1);
-            return vals[random];
+        if ( number === 1 )
+        {
+            const random = Math.floor( Math.random() * vals.length - 1 );
+            return vals[ random ];
         }
-        else {
+        else
+        {
             const res = [];
-            for (number; number > 0; number--) {
-                const random = Math.floor(Math.random() * vals.length - 1);
-                res.push(vals[random]);
+            for ( number; number > 0; number-- )
+            {
+                const random = Math.floor( Math.random() * vals.length - 1 );
+                res.push( vals[ random ] );
             }
-            return res
+            return res;
         }
     }
     /**
@@ -190,8 +216,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param position position of Value tp be returned
      * @return V 
      */
-    public getByPosition(position: number): V {
-        return this.allValues()[position - 1];
+    public getByPosition ( position: number ): V
+    {
+        return this.allValues()[ position - 1 ];
     }
     /**
      * @method break
@@ -199,15 +226,17 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func function according to which Group is to breaked into
      * @return [ trueGroup,falseGroup]
      */
-    public break(func: (val: V, key: K, grp: this) => boolean): [Group, Group] {
+    public break ( func: ( val: V, key: K, grp: this ) => boolean ): [ Group, Group ]
+    {
         const trueGrp = new Group();
         const falseGrp = new Group();
 
-        for (const [key, value] of this) {
-            if (func(value, key, this)) trueGrp.set(key, value)
-            else falseGrp.set(key, value)
+        for ( const [ key, value ] of this )
+        {
+            if ( func( value, key, this ) ) trueGrp.set( key, value );
+            else falseGrp.set( key, value );
         }
-        return [trueGrp, falseGrp];
+        return [ trueGrp, falseGrp ];
     }
     /**
      * @method reverse
@@ -215,9 +244,10 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.reverse()
      * @return Group<K,V>
      */
-    public reverse(): Group<K, V> {
-        const entries = [...this.entries()];
-        return new Group(entries.reverse());
+    public reverse (): Group<K, V>
+    {
+        const entries = [ ...this.entries() ];
+        return new Group( entries.reverse() );
     }
     /**
      * @method concat
@@ -226,13 +256,16 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param grps Array of Group
      * @return Group<any,any>
      */
-    public concat(...grps: Group[]): Group<any, any> {
-        const grp = new Group()
-        const res = grps.map(x => {
-            for (const [key, value] of this) {
-                grp.set(key, value);
+    public concat ( ...grps: Group[] ): Group<any, any>
+    {
+        const grp = new Group();
+        const res = grps.map( x =>
+        {
+            for ( const [ key, value ] of this )
+            {
+                grp.set( key, value );
             }
-        });
+        } );
         return grp;
     }
     /**
@@ -242,8 +275,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func condition to check
      * @return boolean
      */
-    public some(func: (val: V) => boolean): boolean {
-        return this.allValues().some(func);
+    public some ( func: ( val: V ) => boolean ): boolean
+    {
+        return this.allValues().some( func );
     }
     /**
      * @method every
@@ -252,8 +286,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func condition to check
      * @return boolean
      */
-    public every(func: (val: V) => boolean): boolean {
-        return this.allValues().every(func);
+    public every ( func: ( val: V ) => boolean ): boolean
+    {
+        return this.allValues().every( func );
     }
     /**
      * @method someKey
@@ -262,8 +297,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func condition to check
      * @return boolean
      */
-    public someKey(func: (val: K) => boolean): boolean {
-        return this.allKeys().some(func);
+    public someKey ( func: ( val: K ) => boolean ): boolean
+    {
+        return this.allKeys().some( func );
     }
     /**
      * @method everyKey
@@ -272,8 +308,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func condition to check
      * @return boolean
      */
-    public everyKey(func: (val: K) => boolean): boolean {
-        return this.allKeys().every(func);
+    public everyKey ( func: ( val: K ) => boolean ): boolean
+    {
+        return this.allKeys().every( func );
     }
     /**
      * @method remove
@@ -281,14 +318,16 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func condition thats need to be true for a key-value pair to be removed
      * @return data removed size
      */
-    public remove(func: (val: V, key: K, grp: Group) => boolean): number {
+    public remove ( func: ( val: V, key: K, grp: Group ) => boolean ): number
+    {
         const oldSize = this.size;
 
-        for (const [key, value] of this) {
-            if (func(value, key, this)) this.delete(key);
+        for ( const [ key, value ] of this )
+        {
+            if ( func( value, key, this ) ) this.delete( key );
         }
 
-        return (this.size - oldSize);
+        return ( this.size - oldSize );
     }
     /**
      * @method toJSON
@@ -298,8 +337,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param space same as JSON.stringify
      * @return string
      */
-    public toJSON(replacer?: (this: any, key: string, value: any) => any, space = 2): string {
-        return JSON.stringify(this.object(), replacer || null, space)
+    public toJSON ( replacer?: ( this: any, key: string, value: any ) => any, space = 2 ): string
+    {
+        return JSON.stringify( this.object(), replacer || null, space );
     }
     /**
      * @method binarySearch
@@ -310,40 +350,46 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param sort whether to sort the Group before Searching
      * @return V | void
      */
-    public binarySearch(value: string | number, valueProp?: string, sort = true): V | void {
+    public binarySearch ( value: string | number, valueProp?: string, sort = true ): V | void
+    {
         const vals = this.allValues();
 
-        if (sort) {
-            vals.sort((a, b) => {
-                if (a < b) return 1
-                else if (a > b) return -1
-                else return 0
-            });
+        if ( sort )
+        {
+            vals.sort( ( a, b ) =>
+            {
+                if ( a < b ) return 1;
+                else if ( a > b ) return -1;
+                else return 0;
+            } );
         }
 
-        const fn = (search: string | number) => {
+        const fn = ( search: string | number ) =>
+        {
             let found = false;
             let start = 0;
             let end = vals.length - 1;
             let val;
 
-            while (start <= end) {
-                const mid = Math.floor((start + end) / 2);
-                const vm = eval(valueProp ? `vals[ mid ]?.${valueProp}` : `vals[mid]`)
-                if (search > vm) start = mid + 1;
-                else if (search < vm) end = mid - 1;
+            while ( start <= end )
+            {
+                const mid = Math.floor( ( start + end ) / 2 );
+                const vm = eval( valueProp ? `vals[ mid ]?.${ valueProp }` : `vals[mid]` );
+                if ( search > vm ) start = mid + 1;
+                else if ( search < vm ) end = mid - 1;
                 else found = true;
 
-                if (found) {
-                    break
-                    val = vals[mid];
+                if ( found )
+                {
+                    break;
+                    val = vals[ mid ];
                 };
             }
 
             return val;
-        }
+        };
 
-        return fn(value);
+        return fn( value );
     }
     /**
      * @method clone
@@ -351,19 +397,21 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param grp : Group to be cloned
      * @return Group
     */
-    public clone(grp: Group): Group {
-        return new Group(grp);
+    public clone ( grp: Group ): Group
+    {
+        return new Group( grp );
     }
     /**
      * @method removeRandom
      * @description removes a random Data from Group
      * @return void
      */
-    public removeRandom(): void {
-        const random = Math.floor(Math.random() * (this.size - 1));
+    public removeRandom (): void
+    {
+        const random = Math.floor( Math.random() * ( this.size - 1 ) );
         const keys = this.allKeys();
 
-        this.delete(keys[random]);
+        this.delete( keys[ random ] );
     }
     /**
      * @method map
@@ -372,10 +420,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func Function to be mapped
      * @return U[]
      */
-    public map<U>(func: (val: V, key: K, grp: this) => U): U[] {
+    public map<U> ( func: ( val: V, key: K, grp: this ) => U ): U[]
+    {
         let res: U[] = [];
-        for (const [key, value] of this) {
-            res.push(func(value, key, this))
+        for ( const [ key, value ] of this )
+        {
+            res.push( func( value, key, this ) );
         }
         return res;
     }
@@ -387,8 +437,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param to position of Data  in Group to be sliced to.
      * @return Group<K,V>
      */
-    public slice(from = 1, to?: number): Group<K, V> {
-        return new Group([...this.entries()].slice((from - 1), (to - 1)));
+    public slice ( from = 1, to?: number ): Group<K, V>
+    {
+        return new Group( [ ...this.entries() ].slice( ( from - 1 ), ( to - 1 ) ) );
     }
     /**
      * @method pop
@@ -396,11 +447,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.pop()
      * @return V
      */
-    public pop(): V {
+    public pop (): V
+    {
         const keys = this.allKeys();
-        const data = this.get(keys[this.size - 1]);
-        this.delete(keys[this.size - 1]);
-        return data
+        const data = this.get( keys[ this.size - 1 ] );
+        this.delete( keys[ this.size - 1 ] );
+        return data;
     }
     /**
      * @method shift
@@ -408,10 +460,11 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.shfit()
      * @return V
      */
-    public shift(): V {
+    public shift (): V
+    {
         const keys = this.allKeys();
-        const data = this.get(keys[0]);
-        this.delete(keys[0]);
+        const data = this.get( keys[ 0 ] );
+        this.delete( keys[ 0 ] );
         return data;
     }
     /**
@@ -422,10 +475,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V) {
+    public reduce ( func: ( preVal: V, curVal: V, curKey: K, grp: this ) => V, intVal?: V )
+    {
         let pref = intVal;
-        for (const [key, value] of this) {
-            pref = func(pref, value, key, this);
+        for ( const [ key, value ] of this )
+        {
+            pref = func( pref, value, key, this );
         }
         return pref;
     }
@@ -437,10 +492,12 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V) {
+    public reduceRight ( func: ( preVal: V, curVal: V, curKey: K, grp: this ) => V, intVal?: V )
+    {
         let pref = intVal;
-        for (const [key, value] of this.reverse()) {
-            pref = func(pref, value, key, this);
+        for ( const [ key, value ] of this.reverse() )
+        {
+            pref = func( pref, value, key, this );
         }
         return pref;
     }
@@ -452,8 +509,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduceArray(func: (preVal: V, curVal: V, curIndex: number, array: V[]) => V, intVal?: V) {
-        return this.allValues().reduce(func, intVal)
+    public reduceArray ( func: ( preVal: V, curVal: V, curIndex: number, array: V[] ) => V, intVal?: V )
+    {
+        return this.allValues().reduce( func, intVal );
     }
     /**
      * @method reduceRightArray
@@ -463,8 +521,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    public reduceRightArray(func: (preVal: V, curVal: V, curIndex: number, array: V[]) => V, intVal?: V) {
-        return this.allValues().reduceRight(func, intVal)
+    public reduceRightArray ( func: ( preVal: V, curVal: V, curIndex: number, array: V[] ) => V, intVal?: V )
+    {
+        return this.allValues().reduceRight( func, intVal );
     }
     /**
      * @method position
@@ -473,8 +532,9 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param key Key in the Group
      * @return number
      */
-    public position(key: K): number {
-        return (this.allKeys().indexOf(key) + 1);
+    public position ( key: K ): number
+    {
+        return ( this.allKeys().indexOf( key ) + 1 );
     }
     /**
      * @method findPosition
@@ -483,15 +543,18 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param func function to find position
      * @return number
      */
-    public findPosition(func: (value: V, key: K, grp: this) => boolean) {
+    public findPosition ( func: ( value: V, key: K, grp: this ) => boolean )
+    {
         let i = 1;
         let res = 0;
-        for (const [key, value] of this) {
-            if (func(value, key, this)) {
+        for ( const [ key, value ] of this )
+        {
+            if ( func( value, key, this ) )
+            {
                 break;
                 res = i;
             }
-            else i++
+            else i++;
         }
         return res;
     }
@@ -502,13 +565,30 @@ export class Group<K = any, V = any> extends Map<K, V> {
      * @param alternate alternate gap
      * @return void
      */
-    public removeAlternate(offset = 0, alternate = 1) {
+    public removeAlternate ( offset = 0, alternate = 1 )
+    {
         let i = offset;
         const keys = this.allKeys();
 
-        while (i < this.size) {
-            this.delete(keys[i]);
-            i = + (alternate + 1)
+        while ( i < this.size )
+        {
+            this.delete( keys[ i ] );
+            i = + ( alternate + 1 );
         }
+    }
+    /**
+     * @method asyncMap 
+     * @description map over the data asynchriously
+     * @param  {(val:V,key:K,grp:this)=>U} func function to be mapped
+     * @returns Promise
+     */
+    public async asyncMap<U> ( func: ( val: V, key: K, grp: this ) => U ): Promise<U[]>
+    {
+        const res: U[] = [];
+        for ( const [ key, value ] of this )
+        {
+            res.push(  func( value, key, this ) );
+        }
+        return res;
     }
 }

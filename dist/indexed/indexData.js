@@ -1,25 +1,20 @@
-type Character = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
-
-export class IndexData<K = string, V = Array<number>> {
-    letters: Record<Character | string, Array<number>>;
-    length: number;
-
-    constructor(word: string) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IndexData = void 0;
+class IndexData {
+    constructor(word) {
         const wordArray = word.split('');
-
         Object.defineProperty(this, 'letters', { value: {} });
         Object.defineProperty(this, 'length', { value: wordArray.length, writable: true });
-
         wordArray.forEach((x, y) => {
             let LetterIndexes = this.letters[x];
-
             if (LetterIndexes) {
                 LetterIndexes.push(y);
-                this.letters[x] = LetterIndexes
+                this.letters[x] = LetterIndexes;
             }
             else {
                 LetterIndexes = [y];
-                this.letters[x] = LetterIndexes
+                this.letters[x] = LetterIndexes;
             }
         });
     }
@@ -30,7 +25,7 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(1) | worst : O(1)
      * @return boolean
      */
-    public has(letter: Character): boolean {
+    has(letter) {
         return this.letters[letter] ? true : false;
     }
     /**
@@ -40,11 +35,13 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(1) | worst : O(1)
      * @return boolean
      */
-    public add(letter: Character): number[] {
+    add(letter) {
         let LetterPlaces = this.letters[letter];
-        if (!LetterPlaces) this.letters[letter] = [this.length];
-        else this.letters[letter].push(this.length);
-        this.length += 1
+        if (!LetterPlaces)
+            this.letters[letter] = [this.length];
+        else
+            this.letters[letter].push(this.length);
+        this.length += 1;
         return this.letters[letter];
     }
     /**
@@ -54,14 +51,13 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(1) | worst : O(n)
      * @return new number[]
      */
-    public remove(letter: Character): number[] {
-        if (!this.has(letter)) return [-1];
+    remove(letter) {
+        if (!this.has(letter))
+            return [-1];
         else {
             const indexes = this.letters[letter];
             indexes.pop();
-
             this.length -= 1;
-
             return indexes;
         }
     }
@@ -71,8 +67,8 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n) | worst : O(n)
      * @return [string,number[]][]
      */
-    public entries() {
-        return Object.entries(this.letters)
+    entries() {
+        return Object.entries(this.letters);
     }
     /**
      * @method toString
@@ -80,9 +76,8 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n) | worst : O(n^2)
      * @return string
      */
-    public toString(): string {
-        const string: string[] = [];
-
+    toString() {
+        const string = [];
         for (const [key, value] of this.entries()) {
             if (value.length === 1) {
                 string[value[0]] = key;
@@ -91,7 +86,7 @@ export class IndexData<K = string, V = Array<number>> {
                 let i = value.length - 1;
                 while (i >= 0) {
                     string[value[i]] = key;
-                    i--
+                    i--;
                 }
             }
         }
@@ -103,10 +98,10 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return U[]
      */
-    public map<U>(func: (indexes: number[], letter: Character | string, Data: this) => U): U[] {
+    map(func) {
         const res = [];
         for (const [key, value] of this.entries()) {
-            res.push(func(value, key, this))
+            res.push(func(value, key, this));
         }
         return res;
     }
@@ -116,7 +111,7 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : O(n^2) | worst : O(n^2)
      * @return void
      */
-    public forEach(func: (indexes: number[], letter: Character | string, Data: this) => void): void {
+    forEach(func) {
         for (const [key, value] of this.entries()) {
             func(value, key, this);
         }
@@ -127,32 +122,32 @@ export class IndexData<K = string, V = Array<number>> {
      * @Complexity best : <=O(n) | worst : O(n)
      * @return number
      */
-    public get size(): number {
+    get size() {
         return Object.keys(this.letters).length;
     }
     /**
      * @method set
      */
-    public set(letter: Character, indexes: number[]): number[] {
-
+    set(letter, indexes) {
         for (let [key, values] of this.entries()) {
-            const res: number[] = [];
-
+            const res = [];
             values.forEach((x) => {
                 if (!indexes.includes(x)) {
                     res.push(x);
                 }
             });
-            this.letters[key] = res
+            this.letters[key] = res;
         }
         this.letters[letter] = indexes;
-        this.length = this.values().map(x => x.length).reduce((a, b) => a + b)
+        this.length = this.values().map(x => x.length).reduce((a, b) => a + b);
         return indexes;
     }
     /**
      * values
      */
-    public values(): Array<Array<number>> {
-        return Object.values(this.letters)
+    values() {
+        return Object.values(this.letters);
     }
 }
+exports.IndexData = IndexData;
+//# sourceMappingURL=indexData.js.map

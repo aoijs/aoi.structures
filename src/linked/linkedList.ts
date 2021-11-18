@@ -1,90 +1,108 @@
 import * as Types from './types';
 import Node from './node';
 
-export class LinkedList {
+export class LinkedList
+{
     head: null | Node;
     size: number;
     __lastNode__: Node;
-    constructor() {
+    constructor ()
+    {
         this.head = null;
         this.size = 0;
-        Object.defineProperty(this, '__lastNode__', { value: null, writable: true, enumerable: true })
+        Object.defineProperty( this, '__lastNode__', { value: null, writable: true, enumerable: true } );
     }
     /**
      * @method add
      * @description adds an element to the list
      * @param element element to be added in the list
      */
-    public add(element: unknown) {
-        const node = new Node(element);
-        if (!this.head) {
+    public add ( element: unknown )
+    {
+        const node = new Node( element );
+        if ( !this.head )
+        {
             this.head = node;
         }
-        else {
+        else
+        {
             let curr = this.head;
-            while (curr) {
+            while ( curr )
+            {
                 curr = curr.next;
             }
             curr.next = node;
         }
-        this.size++
+        this.size++;
         this.__lastNode__ = node;
     }
     /**
      * removeLast
      */
-    public removeLast(): Node {
+    public removeLast (): Node
+    {
         let curr = this.head;
         let prev;
 
-        while (curr) {
+        while ( curr )
+        {
             prev = curr;
             curr = curr.next;
         }
         prev.next = null;
         this.__lastNode__ = prev;
-        this.size--
+        this.size--;
         return curr;
     }
     /**
      * remove
      */
-    public remove(element: unknown): void {
+    public remove ( element: unknown ): void
+    {
         let curr = this.head;
         let prev;
 
-        if (!curr) return;
-        else if (this.head.element === element) {
+        if ( !curr ) return;
+        else if ( this.head.element === element )
+        {
             curr = this.head.next;
             this.head = curr;
         }
-        else {
-            while (curr) {
+        else
+        {
+            while ( curr )
+            {
                 prev = curr;
-                if (curr.element = element) {
+                if ( curr.element = element )
+                {
                     prev.next = curr.next;
                     break;
                 }
-                else {
+                else
+                {
                     curr = curr.next;
                 }
             }
         }
-        this.size--
+        this.size--;
     }
     /**
      * insertAt
      */
-    public insertAt(index: number, element: unknown): void {
-        const node = new Node(element);
+    public insertAt ( index: number, element: unknown ): void
+    {
+        const node = new Node( element );
 
-        if (index < 0 || index > this.size) {
-            throw new Error("Index Can Only be from 0 to " + this.size);
+        if ( index < 0 || index > this.size )
+        {
+            throw new Error( "Index Can Only be from 0 to " + this.size );
         }
-        else {
+        else
+        {
             let curr = this.head;
             let i = 0;
-            while (i < index) {
+            while ( i < index )
+            {
                 curr = curr.next;
             }
             curr.next = node;
@@ -93,20 +111,24 @@ export class LinkedList {
     /**
      * isEmpty
      */
-    public isEmpty() {
+    public isEmpty ()
+    {
         return this.head ? false : true;
     }
     /**
      * map
      */
-    public map<U>(func: (element: unknown, node: Node) => U): U[] {
+    public map<U> ( func: ( element: unknown, node: Node ) => U ): U[]
+    {
         let curr = this.head;
         let res: U[] = [];
 
-        if (!curr) return res;
-        else {
-            while (curr) {
-                res.push(func(curr.element, curr));
+        if ( !curr ) return res;
+        else
+        {
+            while ( curr )
+            {
+                res.push( func( curr.element, curr ) );
             }
             return res;
         }
@@ -114,13 +136,16 @@ export class LinkedList {
     /**
      * forEach
      */
-    public forEach<U>(func: (element: unknown, node: Node) => U): void {
+    public forEach<U> ( func: ( element: unknown, node: Node ) => U ): void
+    {
         let curr = this.head;
 
-        if (!curr) return;
-        else {
-            while (curr) {
-                func(curr.element, curr);
+        if ( !curr ) return;
+        else
+        {
+            while ( curr )
+            {
+                func( curr.element, curr );
             }
         }
     }
