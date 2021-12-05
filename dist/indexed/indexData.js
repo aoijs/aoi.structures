@@ -3,9 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndexData = void 0;
 class IndexData {
     constructor(word) {
-        const wordArray = word.split('');
-        Object.defineProperty(this, 'letters', { value: {} });
-        Object.defineProperty(this, 'length', { value: wordArray.length, writable: true });
+        const wordArray = word.split("");
+        Object.defineProperty(this, "letters", { value: {} });
+        Object.defineProperty(this, "length", {
+            value: wordArray.length,
+            writable: true,
+        });
         wordArray.forEach((x, y) => {
             let LetterIndexes = this.letters[x];
             if (LetterIndexes) {
@@ -90,7 +93,7 @@ class IndexData {
                 }
             }
         }
-        return string.join('');
+        return string.join("");
     }
     /**
      * @method map
@@ -139,7 +142,9 @@ class IndexData {
             this.letters[key] = res;
         }
         this.letters[letter] = indexes;
-        this.length = this.values().map(x => x.length).reduce((a, b) => a + b);
+        this.length = this.values()
+            .map((x) => x.length)
+            .reduce((a, b) => a + b);
         return indexes;
     }
     /**

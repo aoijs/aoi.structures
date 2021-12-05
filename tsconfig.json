@@ -19,7 +19,7 @@
 		"listFiles": false,
 		"noEmitHelpers": true
 	},
-	"include": ["src/**/*", "error/StructureErrors.ts"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules"],
 	"compileOnSave": false
 }

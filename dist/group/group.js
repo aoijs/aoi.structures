@@ -236,7 +236,7 @@ class Group extends Map {
      */
     concat(...grps) {
         const grp = new Group();
-        const res = grps.map(x => {
+        const res = grps.map((x) => {
             for (const [key, value] of this) {
                 grp.set(key, value);
             }
@@ -295,7 +295,7 @@ class Group extends Map {
             if (func(value, key, this))
                 this.delete(key);
         }
-        return (this.size - oldSize);
+        return this.size - oldSize;
     }
     /**
      * @method toJSON
@@ -347,7 +347,6 @@ class Group extends Map {
                     break;
                     val = vals[mid];
                 }
-                ;
             }
             return val;
         };
@@ -358,7 +357,7 @@ class Group extends Map {
      * @description clones a Group
      * @param grp : Group to be cloned
      * @return Group
-    */
+     */
     clone(grp) {
         return new Group(grp);
     }
@@ -395,7 +394,7 @@ class Group extends Map {
      * @return Group<K,V>
      */
     slice(from = 1, to) {
-        return new Group([...this.entries()].slice((from - 1), (to - 1)));
+        return new Group([...this.entries()].slice(from - 1, to - 1));
     }
     /**
      * @method pop
@@ -481,7 +480,7 @@ class Group extends Map {
      * @return number
      */
     position(key) {
-        return (this.allKeys().indexOf(key) + 1);
+        return this.allKeys().indexOf(key) + 1;
     }
     /**
      * @method findPosition

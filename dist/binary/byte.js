@@ -6,7 +6,7 @@ class Byte {
         this.name = name;
         this.size = size;
         this.type = type;
-        this.data = type === 'string' ? [] : type === "number" ? ['00'] : [];
+        this.data = type === "string" ? [] : type === "number" ? ["00"] : [];
     }
 }
 exports.Byte = Byte;

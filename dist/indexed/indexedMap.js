@@ -14,7 +14,7 @@ class IndexedMap {
         return this.data.size;
     }
     bind(data) {
-        if (typeof data === 'object') {
+        if (typeof data === "object") {
             for (const [_, value] of Object.entries(data)) {
                 this.data.set(this.size, value);
             }

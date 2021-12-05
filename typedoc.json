@@ -5,7 +5,8 @@
         "src/group/group.ts",
         "src/tree/tree.ts",
         "src/tree/branch.ts",
-        "src/tree/leaf.ts"
+        "src/tree/leaf.ts",
+        "src/group/limitGroup.ts"
     ],
     "out": "docs",
     "tsconfig": "tsconfig.json",

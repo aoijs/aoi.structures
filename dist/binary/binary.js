@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Binary = void 0;
+const StructureErrors_1 = require("../error/StructureErrors");
 const byte_1 = require("./byte");
 class Binary {
     constructor(size = Infinity) {
@@ -29,33 +30,43 @@ class Binary {
      */
     addByteData(name, data) {
         const byte = this.data[name];
-        //  if (!byte) throw new Error("Byte With Name:" + name + " Doesn't Exist!");
-        const type = byte.type;
-        if (type === 'string' && typeof data === 'string') {
-            byte.data = data.split('').map(x => x.charCodeAt(0).toString(2));
+        if (!byte) {
+            StructureErrors_1.default.BinaryError("InvalidByteError", "addByteData", "Invalid Byte name provided");
         }
-        else if (type === 'number') {
+        const type = byte.type;
+        if (type === "string" && typeof data === "string") {
+            byte.data = data.split("").map((x) => x.charCodeAt(0).toString(2));
+        }
+        else if (type === "number") {
             byte.data = [Number(data).toString(2)];
         }
     }
     /**
-     * getRawData
+     * @method getRawData
+     * @description gets the raw  data from byte
+     * @param name name of the byte
+     * @return {string | string[]} data
      */
     getRawData(name) {
         const { data, type } = this.data[name];
-        if (type === 'string')
+        if (type === "string")
             return data;
         else
             return data[0];
     }
     /**
-     * getData
+     * @method getData
+     * @description gets data from byte
+     * @param name name of the byte
+     * @return {string | number } data
      */
     getData(name) {
         const byte = this.data[name];
         const type = byte.type;
-        if (type === 'string') {
-            return byte.data.map(bin => String.fromCharCode(parseInt(bin, 2))).join("");
+        if (type === "string") {
+            return byte.data
+                .map((bin) => String.fromCharCode(parseInt(bin, 2)))
+                .join("");
         }
         else
             return parseInt(byte.data[0], 2);

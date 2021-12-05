@@ -1,7 +1,83 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Group = void 0;
-class Group extends Map {
+exports.LimitGroup = void 0;
+const group_1 = require("./group");
+const StructureErrors_1 = require("../error/StructureErrors");
+class LimitGroup {
+    constructor(data, options = {
+        limit: Infinity,
+        sweepOptions: {
+            sweepMessages: true,
+            afterMethod: "limitCross",
+        },
+    }) {
+        this.data = new group_1.Group(data);
+        this._options = options;
+    }
+    /**
+     * @method size
+     * @readonly
+     * @similiar Map.size
+     * @returns {number}
+     */
+    get size() {
+        return this.data.size;
+    }
+    /**
+     * @method set
+     * @param {K} key
+     * @param {V} value
+     * @similiar Map.set
+     * @returns {void}
+     */
+    set(key, value) {
+        if (this._options.limit < this.size) {
+            StructureErrors_1.default.LimitGroupError("LimitExceedError", "set", "Cannot add the data because it exceeds the provided limit");
+        }
+        else if (this._options.limit < this.size &&
+            this._options.sweepOptions.afterMethod === "limitCross") {
+            this.shift();
+            this.data.set(key, value);
+        }
+        else {
+            this.data.set(key, value);
+        }
+    }
+    /**
+     * @method get
+     * @param {K} key
+     * @similiar Map.get
+     * @returns {V}
+     */
+    get(key) {
+        return this.data.get(key);
+    }
+    /**
+     * @method delete
+     * @param {K} key
+     * @similiar Map.delete
+     * @returns {boolean}
+     */
+    delete(key) {
+        return this.data.delete(key);
+    }
+    /**
+     * @method clear
+     * @similiar Map.clear
+     * @returns {void}
+     */
+    clear() {
+        return this.data.clear();
+    }
+    /**
+     * @method has
+     * @param {K} key
+     * @similiar Map.has
+     * @returns {boolean}
+     */
+    has(key) {
+        return this.data.has(key);
+    }
     /**
      * @method find
      * @similiar Array.find
@@ -9,7 +85,7 @@ class Group extends Map {
      * @return V
      */
     find(func) {
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             if (func(value, key, this)) {
                 return value;
                 break;
@@ -29,14 +105,14 @@ class Group extends Map {
      * @method allValues
      * @return V[]    */
     allValues() {
-        return [...this.values()];
+        return [...this.data.values()];
     }
     /**
      * @method allKeys
      * @return K[]
      */
     allKeys() {
-        return [...this.keys()];
+        return [...this.data.keys()];
     }
     /**
      * @method sortViaKeys
@@ -45,8 +121,8 @@ class Group extends Map {
      * @return Group
      */
     sortViaKeys() {
-        const entries = [...this.entries()];
-        return new Group(entries.sort((a, b) => {
+        const entries = [...this.data.entries()];
+        return new group_1.Group(entries.sort((a, b) => {
             if (a[0] < b[0])
                 return 1;
             else if (a[0] > b[0])
@@ -62,7 +138,7 @@ class Group extends Map {
      * @return Group
      */
     weakSort() {
-        return new Group([...this.entries()].sort());
+        return new group_1.Group([...this.data.entries()].sort());
     }
     /**
      * @method filter
@@ -72,8 +148,8 @@ class Group extends Map {
      * @return Group
      */
     filter(func) {
-        const g = new Group();
-        for (const [key, value] of this) {
+        const g = new group_1.Group();
+        for (const [key, value] of this.data) {
             if (func(value, key, this))
                 g.set(key, value);
         }
@@ -98,9 +174,9 @@ class Group extends Map {
      * @return Group
      */
     sort(compareFunction) {
-        const entries = [...this.entries()];
+        const entries = [...this.data.entries()];
         const sorted = entries.sort((a, b) => compareFunction(a[1], b[1]));
-        return new Group(sorted);
+        return new group_1.Group(sorted);
     }
     /**
      * @method object
@@ -110,7 +186,7 @@ class Group extends Map {
      */
     object() {
         const obj = {};
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             obj[`${key}`] = value;
         }
         return obj;
@@ -207,9 +283,9 @@ class Group extends Map {
      * @return [ trueGroup,falseGroup]
      */
     break(func) {
-        const trueGrp = new Group();
-        const falseGrp = new Group();
-        for (const [key, value] of this) {
+        const trueGrp = new group_1.Group();
+        const falseGrp = new group_1.Group();
+        for (const [key, value] of this.data) {
             if (func(value, key, this))
                 trueGrp.set(key, value);
             else
@@ -224,8 +300,8 @@ class Group extends Map {
      * @return Group<K,V>
      */
     reverse() {
-        const entries = [...this.entries()];
-        return new Group(entries.reverse());
+        const entries = [...this.data.entries()];
+        return new group_1.Group(entries.reverse());
     }
     /**
      * @method concat
@@ -235,9 +311,9 @@ class Group extends Map {
      * @return Group<any,any>
      */
     concat(...grps) {
-        const grp = new Group();
+        const grp = new group_1.Group();
         const res = grps.map((x) => {
-            for (const [key, value] of this) {
+            for (const [key, value] of this.data) {
                 grp.set(key, value);
             }
         });
@@ -290,12 +366,12 @@ class Group extends Map {
      * @return data removed size
      */
     remove(func) {
-        const oldSize = this.size;
-        for (const [key, value] of this) {
-            if (func(value, key, this))
-                this.delete(key);
+        const oldSize = this.data.size;
+        for (const [key, value] of this.data) {
+            if (func(value, key, this.data))
+                this.data.delete(key);
         }
-        return this.size - oldSize;
+        return this.data.size - oldSize;
     }
     /**
      * @method toJSON
@@ -359,7 +435,7 @@ class Group extends Map {
      * @return Group
      */
     clone(grp) {
-        return new Group(grp);
+        return new group_1.Group(grp);
     }
     /**
      * @method removeRandom
@@ -367,9 +443,9 @@ class Group extends Map {
      * @return void
      */
     removeRandom() {
-        const random = Math.floor(Math.random() * (this.size - 1));
+        const random = Math.floor(Math.random() * (this.data.size - 1));
         const keys = this.allKeys();
-        this.delete(keys[random]);
+        this.data.delete(keys[random]);
     }
     /**
      * @method map
@@ -380,7 +456,7 @@ class Group extends Map {
      */
     map(func) {
         let res = [];
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             res.push(func(value, key, this));
         }
         return res;
@@ -394,7 +470,7 @@ class Group extends Map {
      * @return Group<K,V>
      */
     slice(from = 1, to) {
-        return new Group([...this.entries()].slice(from - 1, to - 1));
+        return new group_1.Group([...this.data.entries()].slice(from - 1, to - 1));
     }
     /**
      * @method pop
@@ -404,8 +480,8 @@ class Group extends Map {
      */
     pop() {
         const keys = this.allKeys();
-        const data = this.get(keys[this.size - 1]);
-        this.delete(keys[this.size - 1]);
+        const data = this.data.get(keys[this.data.size - 1]);
+        this.data.delete(keys[this.data.size - 1]);
         return data;
     }
     /**
@@ -430,7 +506,7 @@ class Group extends Map {
      */
     reduce(func, intVal) {
         let pref = intVal;
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             pref = func(pref, value, key, this);
         }
         return pref;
@@ -492,7 +568,7 @@ class Group extends Map {
     findPosition(func) {
         let i = 1;
         let res = 0;
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             if (func(value, key, this)) {
                 break;
                 res = i;
@@ -525,11 +601,11 @@ class Group extends Map {
      */
     async asyncMap(func) {
         const res = [];
-        for (const [key, value] of this) {
+        for (const [key, value] of this.data) {
             res.push(func(value, key, this));
         }
         return res;
     }
 }
-exports.Group = Group;
-//# sourceMappingURL=group.js.map
+exports.LimitGroup = LimitGroup;
+//# sourceMappingURL=limitGroup.js.map

@@ -6,7 +6,11 @@ class LinkedList {
     constructor() {
         this.head = null;
         this.size = 0;
-        Object.defineProperty(this, '__lastNode__', { value: null, writable: true, enumerable: true });
+        Object.defineProperty(this, "__lastNode__", {
+            value: null,
+            writable: true,
+            enumerable: true,
+        });
     }
     /**
      * @method add
@@ -58,7 +62,7 @@ class LinkedList {
         else {
             while (curr) {
                 prev = curr;
-                if (curr.element = element) {
+                if ((curr.element = element)) {
                     prev.next = curr.next;
                     break;
                 }
