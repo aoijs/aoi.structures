@@ -526,7 +526,7 @@ class Group extends Map {
     async asyncMap(func) {
         const res = [];
         for (const [key, value] of this) {
-            res.push(func(value, key, this));
+            res.push(await func(value, key, this));
         }
         return res;
     }

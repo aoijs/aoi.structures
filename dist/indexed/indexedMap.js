@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.IndexedMap = void 0;
 class IndexedMap {
     constructor(data) {
         this.data = new Map();
@@ -86,5 +87,5 @@ class IndexedMap {
         return res;
     }
 }
-exports.default = IndexedMap;
+exports.IndexedMap = IndexedMap;
 //# sourceMappingURL=indexedMap.js.map
