@@ -8,7 +8,7 @@
         "src/tree/leaf.ts",
         "src/group/limitGroup.ts",
         "src/indexed/indexData.ts",
-        "src/indexed/indexMap.ts"
+        "src/indexed/indexedMap.ts"
     ],
     "out": "docs",
     "tsconfig": "tsconfig.json",
