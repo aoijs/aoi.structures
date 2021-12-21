@@ -3,7 +3,7 @@
 		"target": "es2021",
 		"moduleResolution": "node",
 		"module": "commonjs",
-		"declaration": false,
+		"declaration": true,
 		"noLib": false,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
@@ -17,9 +17,8 @@
 		"outDir": "dist/",
 		"baseUrl": "src/",
 		"listFiles": false,
-		"noEmitHelpers": true
+		"noEmitHelpers": true,
+		"declarationMap": true,  
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules"],
 	"compileOnSave": false
 }

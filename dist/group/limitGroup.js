@@ -31,10 +31,10 @@ class LimitGroup {
      * @returns {void}
      */
     set(key, value) {
-        if (this._options.limit < this.size) {
+        if (this._options.limit <= this.size) {
             StructureErrors_1.default.LimitGroupError("LimitExceedError", "set", "Cannot add the data because it exceeds the provided limit");
         }
-        else if (this._options.limit < this.size &&
+        else if (this._options.limit <= this.size &&
             this._options.sweepOptions.afterMethod === "limitCross") {
             this.shift();
             this.data.set(key, value);

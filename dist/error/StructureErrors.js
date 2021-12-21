@@ -5,13 +5,13 @@ class StructureError {
      * GroupError
      */
     static GroupError(ErrorName, MethodName, ErrorMessage) {
-        throw new Error(`[Group -> ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
+        throw new Error(`[Group : ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
     }
     static LimitGroupError(ErrorName, MethodName, ErrorMessage) {
-        throw new Error(`[LimitGroup -> ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
+        throw new Error(`[LimitGroup : ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
     }
     static BinaryError(ErrorName, MethodName, ErrorMessage) {
-        throw new Error(`[Binary -> ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
+        throw new Error(`[Binary : ${ErrorName}] -> ${MethodName} : ${ErrorMessage}`);
     }
 }
 exports.default = StructureError;
