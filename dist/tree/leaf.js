@@ -3,6 +3,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Leaf = void 0;
 class Leaf {
+    name;
+    data;
+    branch;
     constructor(name, branch) {
         this.name = name;
         this.branch = branch;

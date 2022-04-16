@@ -5,7 +5,7 @@ export declare class Group<K = any, V = any> extends Map<K, V> {
      * @param func Function to be passed for finding the value.
      * @return V
      */
-    find(func: (value: V, key: K, grp: this) => boolean): V;
+    find(func: (value: V, key: K, grp: this) => boolean): V | undefined;
     /**
      * @method filterArray
      * @similiar Array.filter()
@@ -182,7 +182,7 @@ export declare class Group<K = any, V = any> extends Map<K, V> {
      * @param space same as JSON.stringify
      * @return string
      */
-    toJSON(replacer?: (this: any, key: string, value: any) => any, space?: number): string;
+    toJSON(replacer: ((this: any, key: string, value: any) => any) | undefined, space?: number): string;
     /**
      * @method binarySearch
      * @description searchs for a Value via Binary search
@@ -229,14 +229,14 @@ export declare class Group<K = any, V = any> extends Map<K, V> {
      * @similiar Array.pop()
      * @return V
      */
-    pop(): V;
+    pop(): V | undefined;
     /**
      * @method shift
      * @description removes the firt data
      * @similiar Array.shfit()
      * @return V
      */
-    shift(): V;
+    shift(): V | undefined;
     /**
      * @method reduce
      * @description reduces the data in Group returned by the function
@@ -245,7 +245,7 @@ export declare class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V;
+    reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V | undefined;
     /**
      * @method reduceRight
      * @description reduces the data in Group returned by the function from right to left
@@ -254,7 +254,7 @@ export declare class Group<K = any, V = any> extends Map<K, V> {
      * @param intVal intial data
      * @return V
      */
-    reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V;
+    reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V | undefined;
     /**
      * @method reduceArray
      * @description reduces the values in Group returned by the function

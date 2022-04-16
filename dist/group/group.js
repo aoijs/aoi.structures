@@ -12,7 +12,6 @@ class Group extends Map {
         for (const [key, value] of this) {
             if (func(value, key, this)) {
                 return value;
-                break;
             }
         }
     }
@@ -306,7 +305,7 @@ class Group extends Map {
      * @return string
      */
     toJSON(replacer, space = 2) {
-        return JSON.stringify(this.object(), replacer || null, space);
+        return JSON.stringify(this.object(), replacer, space);
     }
     /**
      * @method binarySearch
@@ -393,7 +392,7 @@ class Group extends Map {
      * @param to position of Data  in Group to be sliced to.
      * @return Group<K,V>
      */
-    slice(from = 1, to) {
+    slice(from = 1, to = 2) {
         return new Group([...this.entries()].slice(from - 1, to - 1));
     }
     /**
@@ -431,6 +430,10 @@ class Group extends Map {
     reduce(func, intVal) {
         let pref = intVal;
         for (const [key, value] of this) {
+            if (pref === undefined) {
+                pref = value;
+                continue;
+            }
             pref = func(pref, value, key, this);
         }
         return pref;
@@ -444,9 +447,16 @@ class Group extends Map {
      * @return V
      */
     reduceRight(func, intVal) {
+        const entries = [...this.entries()];
         let pref = intVal;
-        for (const [key, value] of this.reverse()) {
-            pref = func(pref, value, key, this);
+        let i = this.size;
+        while (i-- > 0) {
+            if (pref === undefined) {
+                pref = entries[i][1];
+            }
+            else {
+                pref = func(pref, entries[i][1], entries[i][0], this);
+            }
         }
         return pref;
     }
@@ -459,7 +469,10 @@ class Group extends Map {
      * @return V
      */
     reduceArray(func, intVal) {
-        return this.allValues().reduce(func, intVal);
+        if (intVal)
+            return this.allValues().reduce(func, intVal);
+        else
+            return this.allValues().reduce(func);
     }
     /**
      * @method reduceRightArray
@@ -470,7 +483,10 @@ class Group extends Map {
      * @return V
      */
     reduceRightArray(func, intVal) {
-        return this.allValues().reduceRight(func, intVal);
+        if (intVal)
+            return this.allValues().reduceRight(func, intVal);
+        else
+            return this.allValues().reduceRight(func);
     }
     /**
      * @method position

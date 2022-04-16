@@ -1,4 +1,5 @@
 import { Branch } from "./branch";
+import { Leaf } from "./leaf";
 type K = string;
 type V = Branch;
 export class Tree {

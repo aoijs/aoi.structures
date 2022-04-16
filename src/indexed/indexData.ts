@@ -27,8 +27,8 @@ export type Character =
 	| "z";
 
 export class IndexData {
-	letters: Record<Character | string, Array<number>>;
-	length: number;
+	letters!: Record<Character | string, Array<number>>;
+	length!: number;
 
 	constructor(word: string) {
 		const wordArray = word.split("");

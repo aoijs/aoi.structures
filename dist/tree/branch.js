@@ -4,6 +4,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Branch = void 0;
 const leaf_1 = require("./leaf");
 class Branch {
+    name;
+    branches;
+    leaves;
     constructor(name, tree) {
         this.name = name;
         this.branches = new Map();

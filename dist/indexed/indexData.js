@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndexData = void 0;
 class IndexData {
+    letters;
+    length;
     constructor(word) {
         const wordArray = word.split("");
         Object.defineProperty(this, "letters", { value: {} });

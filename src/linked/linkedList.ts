@@ -4,7 +4,7 @@ import {Node} from "./node";
 export class LinkedList {
 	head: null | Node;
 	size: number;
-	__lastNode__: Node;
+	__lastNode__?: Node;
 	constructor() {
 		this.head = null;
 		this.size = 0;
@@ -25,7 +25,7 @@ export class LinkedList {
 			this.head = node;
 		} else {
 			let curr = this.head;
-			while (curr) {
+			while (curr.next) {
 				curr = curr.next;
 			}
 			curr.next = node;
@@ -36,14 +36,15 @@ export class LinkedList {
 	/**
 	 * removeLast
 	 */
-	public removeLast(): Node {
+	public removeLast() {
 		let curr = this.head;
 		let prev;
 
-		while (curr) {
+		while (curr?.next) {
 			prev = curr;
 			curr = curr.next;
 		}
+		if(!prev) return null;
 		prev.next = null;
 		this.__lastNode__ = prev;
 		this.size--;
@@ -57,8 +58,8 @@ export class LinkedList {
 		let prev;
 
 		if (!curr) return;
-		else if (this.head.element === element) {
-			curr = this.head.next;
+		else if (curr.element === element) {
+			curr = curr.next;
 			this.head = curr;
 		} else {
 			while (curr) {
@@ -83,11 +84,17 @@ export class LinkedList {
 			throw new Error("Index Can Only be from 0 to " + this.size);
 		} else {
 			let curr = this.head;
+			if(!curr) {
+				this.head = node;
+				return ;
+			}
 			let i = 0;
 			while (i < index) {
+				if(!curr) break;
 				curr = curr.next;
+				i++;
 			}
-			curr.next = node;
+			curr = node;
 		}
 	}
 	/**

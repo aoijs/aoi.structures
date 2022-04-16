@@ -49,6 +49,7 @@ export class SuperSet<T = unknown> extends Set<T> {
 
   union(...sets: (SuperSet<T> | Set<T>)[]) {
     const mainSet = sets.shift();
+            if (!mainSet) return ;
     for (const oset of sets) {
       Array.from(oset).forEach((x: T) => {
         mainSet.add(x);
@@ -59,7 +60,9 @@ export class SuperSet<T = unknown> extends Set<T> {
 
   intersection(...sets: (SuperSet<T> | Set<T>)[]) {
     const mainSet = sets.shift();
+            if (!mainSet) return ;
     for (const set of sets) {
+
       Array.from(set).forEach((x: T) => {
         if (!mainSet.has(x)) mainSet.delete(x);
         else {

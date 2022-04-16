@@ -25,7 +25,7 @@ export declare class LimitGroup<K = any, V = any> {
      * @similiar Map.get
      * @returns {V}
      */
-    get(key: K): V;
+    get(key: K): V | undefined;
     /**
      * @method delete
      * @param {K} key
@@ -52,7 +52,7 @@ export declare class LimitGroup<K = any, V = any> {
      * @param func Function to be passed for finding the value.
      * @return V
      */
-    find(func: (value: V, key: K, grp: this) => boolean): V;
+    find(func: (value: V, key: K, grp: this) => boolean): V | undefined;
     /**
      * @method filterArray
      * @similiar Array.filter()
@@ -276,14 +276,14 @@ export declare class LimitGroup<K = any, V = any> {
      * @similiar Array.pop()
      * @return V
      */
-    pop(): V;
+    pop(): V | undefined;
     /**
      * @method shift
      * @description removes the firt data
      * @similiar Array.shfit()
      * @return V
      */
-    shift(): V;
+    shift(): V | undefined;
     /**
      * @method reduce
      * @description reduces the data in Group returned by the function
@@ -292,7 +292,7 @@ export declare class LimitGroup<K = any, V = any> {
      * @param intVal intial data
      * @return V
      */
-    reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V;
+    reduce(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V | undefined;
     /**
      * @method reduceRight
      * @description reduces the data in Group returned by the function from right to left
@@ -301,7 +301,8 @@ export declare class LimitGroup<K = any, V = any> {
      * @param intVal intial data
      * @return V
      */
-    reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V;
+    reduceRight(func: (preVal: V, curVal: V, curKey: K, grp: this) => V, intVal?: V): V | undefined;
+    entries(): IterableIterator<[K, V]>;
     /**
      * @method reduceArray
      * @description reduces the values in Group returned by the function

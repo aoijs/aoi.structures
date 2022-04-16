@@ -1,24 +1,17 @@
 {
-	"compilerOptions": {
-		"target": "es2021",
-		"moduleResolution": "node",
-		"module": "commonjs",
-		"declaration": true,
-		"noLib": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"sourceMap": true,
-		"pretty": true,
-		"allowUnreachableCode": true,
-		"allowUnusedLabels": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": false,
-		"noImplicitUseStrict": false,
-		"outDir": "dist/",
-		"baseUrl": "src/",
-		"listFiles": false,
-		"noEmitHelpers": true,
-		"declarationMap": true,  
-	},
-	"compileOnSave": false
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "module": "commonjs",
+    "outDir": "./dist",
+    "target": "ESNext"
+  }
 }

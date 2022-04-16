@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkedList = void 0;
 const node_1 = require("./node");
 class LinkedList {
+    head;
+    size;
+    __lastNode__;
     constructor() {
         this.head = null;
         this.size = 0;
@@ -24,7 +27,7 @@ class LinkedList {
         }
         else {
             let curr = this.head;
-            while (curr) {
+            while (curr.next) {
                 curr = curr.next;
             }
             curr.next = node;
@@ -38,10 +41,12 @@ class LinkedList {
     removeLast() {
         let curr = this.head;
         let prev;
-        while (curr) {
+        while (curr?.next) {
             prev = curr;
             curr = curr.next;
         }
+        if (!prev)
+            return null;
         prev.next = null;
         this.__lastNode__ = prev;
         this.size--;
@@ -55,8 +60,8 @@ class LinkedList {
         let prev;
         if (!curr)
             return;
-        else if (this.head.element === element) {
-            curr = this.head.next;
+        else if (curr.element === element) {
+            curr = curr.next;
             this.head = curr;
         }
         else {
@@ -83,11 +88,18 @@ class LinkedList {
         }
         else {
             let curr = this.head;
+            if (!curr) {
+                this.head = node;
+                return;
+            }
             let i = 0;
             while (i < index) {
+                if (!curr)
+                    break;
                 curr = curr.next;
+                i++;
             }
-            curr.next = node;
+            curr = node;
         }
     }
     /**

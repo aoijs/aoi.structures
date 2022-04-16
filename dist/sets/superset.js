@@ -43,6 +43,8 @@ class SuperSet extends Set {
     }
     union(...sets) {
         const mainSet = sets.shift();
+        if (!mainSet)
+            return;
         for (const oset of sets) {
             Array.from(oset).forEach((x) => {
                 mainSet.add(x);
@@ -52,6 +54,8 @@ class SuperSet extends Set {
     }
     intersection(...sets) {
         const mainSet = sets.shift();
+        if (!mainSet)
+            return;
         for (const set of sets) {
             Array.from(set).forEach((x) => {
                 if (!mainSet.has(x))

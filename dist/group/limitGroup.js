@@ -1,9 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LimitGroup = void 0;
 const group_1 = require("./group");
-const StructureErrors_1 = require("../error/StructureErrors");
+const StructureErrors_1 = __importDefault(require("../error/StructureErrors"));
 class LimitGroup {
+    data;
+    _options;
     constructor(data, options = {
         limit: Infinity,
         sweepOptions: {
@@ -382,7 +387,7 @@ class LimitGroup {
      * @return string
      */
     toJSON(replacer, space = 2) {
-        return JSON.stringify(this.object(), replacer || null, space);
+        return JSON.stringify(this.object(), replacer, space);
     }
     /**
      * @method binarySearch
@@ -469,7 +474,7 @@ class LimitGroup {
      * @param to position of Data  in Group to be sliced to.
      * @return Group<K,V>
      */
-    slice(from = 1, to) {
+    slice(from = 1, to = 2) {
         return new group_1.Group([...this.data.entries()].slice(from - 1, to - 1));
     }
     /**
@@ -507,6 +512,10 @@ class LimitGroup {
     reduce(func, intVal) {
         let pref = intVal;
         for (const [key, value] of this.data) {
+            if (pref === undefined) {
+                pref = value;
+                continue;
+            }
             pref = func(pref, value, key, this);
         }
         return pref;
@@ -520,11 +529,21 @@ class LimitGroup {
      * @return V
      */
     reduceRight(func, intVal) {
+        const entries = [...this.entries()];
         let pref = intVal;
-        for (const [key, value] of this.reverse()) {
-            pref = func(pref, value, key, this);
+        let i = this.size;
+        while (i-- > 0) {
+            if (pref === undefined) {
+                pref = entries[i][1];
+            }
+            else {
+                pref = func(pref, entries[i][1], entries[i][0], this);
+            }
         }
         return pref;
+    }
+    entries() {
+        return this.data.entries();
     }
     /**
      * @method reduceArray
@@ -535,7 +554,10 @@ class LimitGroup {
      * @return V
      */
     reduceArray(func, intVal) {
-        return this.allValues().reduce(func, intVal);
+        if (!intVal)
+            return this.allValues().reduce(func);
+        else
+            return this.allValues().reduce(func, intVal);
     }
     /**
      * @method reduceRightArray
@@ -546,7 +568,10 @@ class LimitGroup {
      * @return V
      */
     reduceRightArray(func, intVal) {
-        return this.allValues().reduceRight(func, intVal);
+        if (!intVal)
+            return this.allValues().reduceRight(func);
+        else
+            return this.allValues().reduceRight(func, intVal);
     }
     /**
      * @method position

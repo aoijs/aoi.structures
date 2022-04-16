@@ -44,7 +44,7 @@ export class IndexedMap<V = any> {
 	 */
 	public findAndRemove(
 		func: (value: V, index?: number, IndexedMap?: this) => boolean,
-	): boolean {
+	) {
 		for (const [index, value] of this.data) {
 			if (func(value, index, this)) {
 				return this.data.delete(index);
@@ -59,7 +59,7 @@ export class IndexedMap<V = any> {
 	 */
 	public find(
 		func: (value: V, index?: number, IndexedMap?: this) => boolean,
-	): V {
+	 ) {
 		for (const [index, value] of this.data) {
 			if (func(value, index, this)) {
 				return value;

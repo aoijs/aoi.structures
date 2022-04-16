@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndexedMap = void 0;
 class IndexedMap {
+    data = new Map();
     constructor(data) {
-        this.data = new Map();
         this.bind(data);
     }
     /**

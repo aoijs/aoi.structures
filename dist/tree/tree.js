@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tree = void 0;
 const branch_1 = require("./branch");
 class Tree {
+    name;
+    age;
+    branches;
     constructor(name, age = Infinity) {
         this.name = name;
         this.age = age;

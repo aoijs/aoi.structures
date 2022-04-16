@@ -1,9 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Binary = void 0;
-const StructureErrors_1 = require("../error/StructureErrors");
+const StructureErrors_1 = __importDefault(require("../error/StructureErrors"));
 const byte_1 = require("./byte");
 class Binary {
+    size;
+    data;
     constructor(size = Infinity) {
         this.size = size;
         this.data = {};

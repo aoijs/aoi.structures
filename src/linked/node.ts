@@ -1,7 +1,7 @@
 export  class Node
 {
     element: unknown;
-    next: Node;
+    next: Node | null;
     constructor ( element: unknown )
     {
         this.element = element;

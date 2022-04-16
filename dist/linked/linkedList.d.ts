@@ -2,7 +2,7 @@ import { Node } from "./node";
 export declare class LinkedList {
     head: null | Node;
     size: number;
-    __lastNode__: Node;
+    __lastNode__?: Node;
     constructor();
     /**
      * @method add
@@ -13,7 +13,7 @@ export declare class LinkedList {
     /**
      * removeLast
      */
-    removeLast(): Node;
+    removeLast(): Node | null;
     /**
      * remove
      */
