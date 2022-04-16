@@ -1,4 +1,4 @@
-declare type Character = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+export declare type Character = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
 export declare class IndexData {
     letters: Record<Character | string, Array<number>>;
     length: number;
@@ -71,5 +71,4 @@ export declare class IndexData {
      */
     values(): Array<Array<number>>;
 }
-export {};
 //# sourceMappingURL=indexData.d.ts.map

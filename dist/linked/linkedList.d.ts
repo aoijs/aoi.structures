@@ -1,4 +1,4 @@
-import Node from "./node";
+import { Node } from "./node";
 export declare class LinkedList {
     head: null | Node;
     size: number;

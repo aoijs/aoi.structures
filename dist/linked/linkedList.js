@@ -18,7 +18,7 @@ class LinkedList {
      * @param element element to be added in the list
      */
     add(element) {
-        const node = new node_1.default(element);
+        const node = new node_1.Node(element);
         if (!this.head) {
             this.head = node;
         }
@@ -77,7 +77,7 @@ class LinkedList {
      * insertAt
      */
     insertAt(index, element) {
-        const node = new node_1.default(element);
+        const node = new node_1.Node(element);
         if (index < 0 || index > this.size) {
             throw new Error("Index Can Only be from 0 to " + this.size);
         }

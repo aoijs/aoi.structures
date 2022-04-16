@@ -1,16 +1,11 @@
 {
     "entryPoints": [
-        "src/binary/binary.ts",
-        "src/binary/byte.ts",
-        "src/group/group.ts",
-        "src/tree/tree.ts",
-        "src/tree/branch.ts",
-        "src/tree/leaf.ts",
-        "src/group/limitGroup.ts",
-        "src/indexed/indexData.ts",
-        "src/indexed/indexedMap.ts"
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
     ],
     "out": "docs",
     "tsconfig": "tsconfig.json",
     "entryPointStrategy": "resolve"
-} 
+}

@@ -1,8 +1,7 @@
 /** @format */
 import { Leaf } from "./leaf";
 import { Tree } from "./tree";
-declare type K = string;
-declare type V = Leaf | Branch;
+import { TreeK as K, TreeV as V } from "./typedef";
 export declare class Branch {
     name: string;
     branches: Map<K, V>;
@@ -77,5 +76,4 @@ export declare class Branch {
      */
     get tree(): Tree;
 }
-export {};
 //# sourceMappingURL=branch.d.ts.map

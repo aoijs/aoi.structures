@@ -1,4 +1,4 @@
-export default class Node {
+export declare class Node {
     element: unknown;
     next: Node;
     constructor(element: unknown);

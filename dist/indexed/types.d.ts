@@ -1,5 +1,4 @@
 export declare type IndexedData = [number, any][] | object | Map<K, V>;
-declare type K = any;
-declare type V = any;
-export {};
+export declare type K = any;
+export declare type V = any;
 //# sourceMappingURL=types.d.ts.map
