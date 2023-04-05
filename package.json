@@ -13,9 +13,9 @@
   "bugs": {
     "url": "https://github.com/USERSATOSHI/Structures/issues"
   },
-  "module": "commonjs",
-  "type": "commonjs",
-  "main": "index.js",
+  "module": "./dist/index.js",
+  "type": "module",
+  "main": "./dist/index.js",
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
   "devDependencies": {
