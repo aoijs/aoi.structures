@@ -5,9 +5,9 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
         this.#maxSize = size;
     }
     filter(func: (val: V, key: K, grp: this) => boolean) {
-        const res: V[] = [];
+        const res = new Group<K, V>(this.#maxSize);
         for (const [key, value] of this.entries()) {
-            if (func(value, key, this)) res.push(value);
+            if (func(value, key, this)) res.set(key,value);
         }
         return res;
     }
