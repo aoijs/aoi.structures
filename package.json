@@ -1,8 +1,9 @@
 {
-  "name": "structures",
+  "name": "@akarui/structures",
   "author": {
-    "name": "USERSATOSH"
+    "name": "AkaruiDevelopment"
   },
+  "maintainers": ["USERSATOSHI"],
   "version": "0.0.1",
   "repository": {
     "type": "github",
