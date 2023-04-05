@@ -10,8 +10,9 @@
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "outDir": "./dist",
-    "target": "ESNext"
+    "target": "ESNext",
+    "rootDir": "./src",
   }
 }
