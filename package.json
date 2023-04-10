@@ -33,8 +33,7 @@
     "createpack": "node packers/pack.js",
     "addpkg": "node packers/addpkgjson.js",
     "bundleTsFiles": "node packers/bundle.js",
-    "lint": "eslint . --ext .ts --fix --ext .js",
-    "postinstall": "npm run build"
+    "lint": "eslint . --ext .ts --fix --ext .js"
   },
   "type": "commonjs"
 }
