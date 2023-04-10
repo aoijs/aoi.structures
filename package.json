@@ -35,5 +35,11 @@
     "bundleTsFiles": "node packers/bundle.js",
     "lint": "eslint . --ext .ts --fix --ext .js"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
 }
