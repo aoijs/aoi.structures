@@ -1,3 +1,3 @@
-import Group from "./Group";
+import Group from "./Group/index.js";
 export { Group };
 //# sourceMappingURL=index.js.map
