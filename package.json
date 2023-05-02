@@ -27,10 +27,10 @@
   },
   "module": "commonjs",
   "type": "commonjs",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/index.js",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js"
+    "import": "./dist/index.js",
+    "require": "./dist/index.js"
   },
   "files": [
     "dist",
