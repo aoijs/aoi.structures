@@ -1,12 +1,22 @@
 {
   "name": "@akarui/structures",
+  "description": "Abstract Data Structures That Make Storing data Much easy.",
+  "version": "1.0.1",
   "author": {
     "name": "AkaruiDevelopment"
   },
   "maintainers": [
     "USERSATOSHI"
   ],
-  "version": "1.0.0",
+  "scripts": {
+    "test": "node tests",
+    "start": "node index.js",
+    "build": " npx tsc -p tsconfig.json",
+    "createpack": "node packers/pack.js",
+    "addpkg": "node packers/addpkgjson.js",
+    "bundleTsFiles": "node packers/bundle.js",
+    "lint": "eslint . --ext .ts --fix --ext .js"
+  },
   "repository": {
     "type": "github",
     "url": "https://github.com/AkaruiDevelopment/structures"
@@ -17,8 +27,17 @@
   },
   "module": "commonjs",
   "type": "commonjs",
-  "main": "index.js",
-  "description": "Abstract Data Structures That Make Storing data Much easy.",
+  "main": "./dist/cjs/index.js",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT",
   "devDependencies": {
     "typedoc": "^0.22.15",
