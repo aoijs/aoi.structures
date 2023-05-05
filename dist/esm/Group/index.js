@@ -203,5 +203,12 @@ export default class Group extends Map {
         arr.sort(([a], [b]) => func(a, b));
         return new Group(this.#maxSize, arr);
     }
+    toJSON() {
+        const obj = {};
+        for (const [key, value] of this.entries()) {
+            obj[key] = value;
+        }
+        return obj;
+    }
 }
 //# sourceMappingURL=index.js.map

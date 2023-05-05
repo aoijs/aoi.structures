@@ -30,5 +30,6 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
     sort(func: (a: V, b: V) => number): Group<K, V>;
     weakSort(): Group<K, V>;
     sortKeys(func: (a: K, b: K) => number): Group<K, V>;
+    toJSON(): Record<string, V>;
 }
 //# sourceMappingURL=index.d.ts.map
