@@ -6,14 +6,14 @@
   "maintainers": [
     "USERSATOSHI"
   ],
-  "version": "0.0.1",
+  "version": "2.0.0",
   "repository": {
     "type": "github",
-    "url": "https://github.com/USERSATOSHI/Structures"
+    "url": "https://github.com/AkaruiDevelopment/structures"
   },
   "readme": "./README.md",
   "bugs": {
-    "url": "https://github.com/USERSATOSHI/Structures/issues"
+    "url": "https://github.com/AkaruiDevelopment/structures/issues"
   },
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
