@@ -179,4 +179,11 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
         arr.sort( ( [ a ], [ b ] ) => func( a, b ) );
         return new Group<K, V>( this.#maxSize, arr );
     }
+    toJSON() {
+        const obj: Record<string, V> = {};
+        for (const [key, value] of this.entries()) {
+            obj[key as unknown as string] = value;
+        }
+        return obj;
+    }
 }
