@@ -1,4 +1,4 @@
-# @akarui Structures
+# @akarui/Structures
 
 A collection of data structures implemented in TypeScript that ease the storage and manipulation of data.
 
