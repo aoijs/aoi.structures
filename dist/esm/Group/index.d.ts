@@ -1,5 +1,6 @@
 export default class Group<K = unknown, V = unknown> extends Map<K, V> {
     #private;
+    [x: string]: any;
     constructor(size: number, it?: Iterable<readonly [K, V]>);
     filter(func: (val: V, key: K, grp: this) => boolean): Group<K, V>;
     V(): V[];

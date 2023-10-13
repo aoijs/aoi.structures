@@ -1,4 +1,5 @@
 export default class Group<K = unknown, V = unknown> extends Map<K, V> {
+    [x: string]: any;
     #maxSize: number;
     constructor(size: number, it?: Iterable<readonly [K, V]>) {
         super(it);
@@ -7,7 +8,7 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
     filter(func: (val: V, key: K, grp: this) => boolean) {
         const res = new Group<K, V>(this.#maxSize);
         for (const [key, value] of this.entries()) {
-            if (func(value, key, this)) res.set(key,value);
+            if (func(value, key, this)) res.set(key, value);
         }
         return res;
     }
@@ -162,22 +163,19 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
     set maxSize(value: number) {
         this.#maxSize = value;
     }
-    sort ( func: ( a: V, b: V ) => number )
-    { 
-        const arr = [ ...this.entries() ];
-        arr.sort( ( [ , a ], [ , b ] ) => func( a, b ) );
-        return new Group<K, V>( this.#maxSize, arr );
+    sort(func: (a: V, b: V) => number) {
+        const arr = [...this.entries()];
+        arr.sort(([, a], [, b]) => func(a, b));
+        return new Group<K, V>(this.#maxSize, arr);
     }
-    weakSort ()
-    {
-        const arr = [ ...this.entries() ].sort();
-        return new Group<K, V>( this.#maxSize, arr );
+    weakSort() {
+        const arr = [...this.entries()].sort();
+        return new Group<K, V>(this.#maxSize, arr);
     }
-    sortKeys ( func: ( a: K, b: K ) => number )
-    {
-        const arr = [ ...this.entries() ];
-        arr.sort( ( [ a ], [ b ] ) => func( a, b ) );
-        return new Group<K, V>( this.#maxSize, arr );
+    sortKeys(func: (a: K, b: K) => number) {
+        const arr = [...this.entries()];
+        arr.sort(([a], [b]) => func(a, b));
+        return new Group<K, V>(this.#maxSize, arr);
     }
     toJSON() {
         const obj: Record<string, V> = {};

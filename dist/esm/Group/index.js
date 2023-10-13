@@ -1,4 +1,6 @@
-export default class Group extends Map {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class Group extends Map {
     #maxSize;
     constructor(size, it) {
         super(it);
@@ -211,4 +213,5 @@ export default class Group extends Map {
         return obj;
     }
 }
+exports.default = Group;
 //# sourceMappingURL=index.js.map

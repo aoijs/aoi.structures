@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "moduleResolution": "NodeNext",
         "target": "ESNext",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
@@ -11,7 +10,6 @@
         "declaration": true,
         "sourceMap": true,
         "declarationMap": true,
-        "resolveJsonModule": true,
         "rootDir": "./src"
     }
 }

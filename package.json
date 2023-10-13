@@ -6,7 +6,7 @@
   "maintainers": [
     "USERSATOSHI"
   ],
-  "version": "2.0.1",
+  "version": "2.1.0",
   "repository": {
     "type": "github",
     "url": "https://github.com/AkaruiDevelopment/structures"
@@ -19,7 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "typedoc": "^0.23.28",
-    "typescript": "^5.0.3"
+    "typescript": "^5.2.2"
   },
   "main": "./dist/cjs/index.js",
   "exports": {
