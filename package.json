@@ -18,8 +18,8 @@
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
   "devDependencies": {
-    "typedoc": "^0.23.28",
-    "typescript": "^5.2.2"
+    "typedoc": "^0.25.7",
+    "typescript": "^5.3.3"
   },
   "main": "./dist/cjs/index.js",
   "exports": {

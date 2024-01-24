@@ -1,1 +1,1 @@
-{"version":3,"file":"Node.d.ts","sourceRoot":"","sources":["../../../src/LinkedList/Node.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,UAAU,CAAC,CAAC;IAC/B,KAAK,EAAE,GAAG,CAAC;IACX,IAAI,EAAE,UAAU,CAAC,CAAC,CAAC,GAAG,IAAI,CAAC;gBAEf,KAAK,EAAC,GAAG;CAItB"}
+{"version":3,"file":"Node.d.ts","sourceRoot":"","sources":["../../../src/LinkedList/Node.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,UAAU;IAC7B,KAAK,EAAE,GAAG,CAAC;IACX,IAAI,EAAE,UAAU,GAAG,IAAI,CAAC;gBAEZ,KAAK,EAAC,GAAG;CAItB"}

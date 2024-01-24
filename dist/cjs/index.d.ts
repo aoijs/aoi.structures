@@ -1,3 +1,4 @@
 import Group from "./Group/index.js";
-export { Group };
+import LinkedList from "./LinkedList/index.js";
+export { Group, LinkedList };
 //# sourceMappingURL=index.d.ts.map
