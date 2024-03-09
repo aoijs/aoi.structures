@@ -6,7 +6,7 @@
   "maintainers": [
     "USERSATOSHI"
   ],
-  "version": "2.1.0",
+  "version": "2.2.0",
   "repository": {
     "type": "github",
     "url": "https://github.com/AkaruiDevelopment/structures"
@@ -18,8 +18,8 @@
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
   "devDependencies": {
-    "typedoc": "^0.25.7",
-    "typescript": "^5.3.3"
+    "typedoc": "^0.25.11",
+    "typescript": "^5.4.2"
   },
   "main": "./dist/cjs/index.js",
   "exports": {
