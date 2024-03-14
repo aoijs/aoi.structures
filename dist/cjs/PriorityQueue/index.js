@@ -7,9 +7,11 @@ const _right = (i) => (i + 1) << 1;
 class PriorityQueue {
     _heap;
     _comparator;
+    _keyMap;
     constructor(comparator = (a, b) => a > b) {
         this._heap = [];
         this._comparator = comparator;
+        this._keyMap = new Map();
     }
     size() {
         return this._heap.length;
@@ -23,6 +25,7 @@ class PriorityQueue {
     push(...values) {
         values.forEach((value) => {
             this._heap.push(value);
+            this._keyMap.set(value, this.size() - 1);
             this._siftUp();
         });
         return this.size();
@@ -32,26 +35,32 @@ class PriorityQueue {
         const bottom = this.size() - 1;
         if (bottom > _top) {
             this._swap(_top, bottom);
+            this._keyMap.set(this._heap[_top], _top);
+            this._keyMap.delete(this._heap[bottom]);
         }
         this._heap.pop();
         this._siftDown();
         return poppedValue;
     }
-    find(value) {
-        return this._findRecursive(value, 0);
+    findIndex(value) {
+        const index = this._keyMap.get(value);
+        return index === undefined ? -1 : index;
     }
-    _findRecursive(value, node) {
+    findFromProp(retrievingFunction) {
+        return this._findFromPropRecursive(retrievingFunction, 0);
+    }
+    _findFromPropRecursive(retrievingFunction, node) {
         if (node >= this._heap.length) {
             return -1; // Value not found
         }
-        if (this._heap[node] === value) {
+        if (retrievingFunction(this._heap[node])) {
             return node; // Value found
         }
-        const leftIndex = this._findRecursive(value, _left(node));
+        const leftIndex = this._findFromPropRecursive(retrievingFunction, _left(node));
         if (leftIndex !== -1) {
             return leftIndex; // Value found in the left subtree
         }
-        const rightIndex = this._findRecursive(value, _right(node));
+        const rightIndex = this._findFromPropRecursive(retrievingFunction, _right(node));
         if (rightIndex !== -1) {
             return rightIndex; // Value found in the right subtree
         }
@@ -63,6 +72,16 @@ class PriorityQueue {
         this._siftDown();
         return replacedValue;
     }
+    replaceFromProp(value, replacingFunction) {
+        const index = this._findFromPropRecursive(replacingFunction, 0);
+        if (index !== -1) {
+            this._heap[index] = value;
+            this._keyMap.delete(this._heap[index].key);
+            this._keyMap.set(value, index);
+            this._siftUp();
+            this._siftDown();
+        }
+    }
     _greater(i, j) {
         return this._comparator(this._heap[i], this._heap[j]);
     }
@@ -73,6 +92,8 @@ class PriorityQueue {
         let node = this.size() - 1;
         while (node > _top && this._greater(node, _parent(node))) {
             this._swap(node, _parent(node));
+            this._keyMap.set(this._heap[node], node);
+            this._keyMap.set(this._heap[_parent(node)], _parent(node));
             node = _parent(node);
         }
     }
@@ -84,6 +105,8 @@ class PriorityQueue {
                 ? _right(node)
                 : _left(node);
             this._swap(node, maxChild);
+            this._keyMap.set(this._heap[node], node);
+            this._keyMap.set(this._heap[maxChild], maxChild);
             node = maxChild;
         }
     }
