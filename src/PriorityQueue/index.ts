@@ -36,26 +36,51 @@ export default class PriorityQueue {
     this._siftDown();
     return poppedValue;
   }
+  find(value: any): number {
+    return this._findRecursive(value, 0);
+  }
+
+  private _findRecursive(value: any, node: number): number {
+    if (node >= this._heap.length) {
+      return -1; // Value not found
+    }
+
+    if (this._heap[node] === value) {
+      return node; // Value found
+    }
+
+    const leftIndex = this._findRecursive(value, _left(node));
+    if (leftIndex !== -1) {
+      return leftIndex; // Value found in the left subtree
+    }
+
+    const rightIndex = this._findRecursive(value, _right(node));
+    if (rightIndex !== -1) {
+      return rightIndex; // Value found in the right subtree
+    }
+
+    return -1; // Value not found
+  }
   replace(value: any) {
     const replacedValue = this.peek();
     this._heap[_top] = value;
     this._siftDown();
     return replacedValue;
   }
-  _greater(i: number, j: number) {
+  private _greater(i: number, j: number) {
     return this._comparator(this._heap[i], this._heap[j]);
   }
-  _swap(i: number, j: number) {
+  private _swap(i: number, j: number) {
     [this._heap[i], this._heap[j]] = [this._heap[j], this._heap[i]];
   }
-  _siftUp() {
+  private _siftUp() {
     let node = this.size() - 1;
     while (node > _top && this._greater(node, _parent(node))) {
       this._swap(node, _parent(node));
       node = _parent(node);
     }
   }
-  _siftDown() {
+  private _siftDown() {
     let node = _top;
     while (
       (_left(node) < this.size() && this._greater(_left(node), node)) ||
