@@ -110,6 +110,15 @@ class PriorityQueue {
             node = maxChild;
         }
     }
+    remove(value) {
+        const index = this._keyMap.get(value);
+        if (index !== undefined) {
+            this._heap.splice(index, 1);
+            this._keyMap.delete(value);
+            this._siftDown();
+            this._siftUp();
+        }
+    }
 }
 exports.default = PriorityQueue;
 //# sourceMappingURL=index.js.map

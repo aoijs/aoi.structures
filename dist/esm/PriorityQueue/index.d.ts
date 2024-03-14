@@ -17,5 +17,6 @@ export default class PriorityQueue {
     private _swap;
     private _siftUp;
     private _siftDown;
+    remove(value: any): void;
 }
 //# sourceMappingURL=index.d.ts.map
