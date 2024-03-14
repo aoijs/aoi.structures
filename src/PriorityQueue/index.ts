@@ -139,4 +139,13 @@ export default class PriorityQueue {
       this._siftUp();
     }
   }
+  removeByProp(retrievingFunction: (a: any) => boolean) {
+    const index = this._findFromPropRecursive(retrievingFunction, 0);
+    if (index !== -1) {
+      this._heap.splice(index, 1);
+      this._keyMap.delete(this._heap[index]);
+      this._siftDown();
+      this._siftUp();
+    }
+  }
 }

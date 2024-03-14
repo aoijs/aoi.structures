@@ -18,5 +18,6 @@ export default class PriorityQueue {
     private _siftUp;
     private _siftDown;
     remove(value: any): void;
+    removeByProp(retrievingFunction: (a: any) => boolean): void;
 }
 //# sourceMappingURL=index.d.ts.map
