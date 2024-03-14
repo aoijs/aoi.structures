@@ -5,8 +5,8 @@ export default class Group<K = unknown, V = unknown> extends Map<K, V> {
     filter(func: (val: V, key: K, grp: this) => boolean): Group<K, V>;
     V(): V[];
     K(): K[];
-    top(amount?: number): any;
-    bottom(amount?: number): any;
+    top(amount?: number): V | V[] | undefined;
+    bottom(amount?: number): V | V[] | undefined;
     shift(): V | undefined;
     shiftN(amount: number): V | V[] | undefined;
     pop(): V | undefined;

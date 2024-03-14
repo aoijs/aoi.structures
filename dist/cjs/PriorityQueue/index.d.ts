@@ -7,10 +7,12 @@ export default class PriorityQueue {
     peek(): any;
     push(...values: any[]): number;
     pop(): any;
+    find(value: any): number;
+    private _findRecursive;
     replace(value: any): any;
-    _greater(i: number, j: number): boolean;
-    _swap(i: number, j: number): void;
-    _siftUp(): void;
-    _siftDown(): void;
+    private _greater;
+    private _swap;
+    private _siftUp;
+    private _siftDown;
 }
 //# sourceMappingURL=index.d.ts.map

@@ -37,6 +37,26 @@ class PriorityQueue {
         this._siftDown();
         return poppedValue;
     }
+    find(value) {
+        return this._findRecursive(value, 0);
+    }
+    _findRecursive(value, node) {
+        if (node >= this._heap.length) {
+            return -1; // Value not found
+        }
+        if (this._heap[node] === value) {
+            return node; // Value found
+        }
+        const leftIndex = this._findRecursive(value, _left(node));
+        if (leftIndex !== -1) {
+            return leftIndex; // Value found in the left subtree
+        }
+        const rightIndex = this._findRecursive(value, _right(node));
+        if (rightIndex !== -1) {
+            return rightIndex; // Value found in the right subtree
+        }
+        return -1; // Value not found
+    }
     replace(value) {
         const replacedValue = this.peek();
         this._heap[_top] = value;
