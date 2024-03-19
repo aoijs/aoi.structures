@@ -1,13 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PriorityQueue = exports.LinkedList = exports.Group = void 0;
-const index_js_1 = __importDefault(require("./Group/index.js"));
-exports.Group = index_js_1.default;
-const index_js_2 = __importDefault(require("./LinkedList/index.js"));
-exports.LinkedList = index_js_2.default;
-const index_js_3 = __importDefault(require("./PriorityQueue/index.js"));
-exports.PriorityQueue = index_js_3.default;
+import Group from "./Group/index.js";
+import LinkedList from "./LinkedList/index.js";
+import PriorityQueue from "./PriorityQueue/index.js";
+export { Group, LinkedList, PriorityQueue };
 //# sourceMappingURL=index.js.map

@@ -1,15 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const Node_js_1 = __importDefault(require("./Node.js"));
-const isEqual_js_1 = __importDefault(require("../utils/isEqual.js"));
-class LinkedList {
+import LinkedNode from "./Node.js";
+import isEqual from "../utils/isEqual.js";
+export default class LinkedList {
     head = null;
     size = 0;
     add(el) {
-        const node = new Node_js_1.default(el);
+        const node = new LinkedNode(el);
         let head = this.head;
         if (head === null) {
             this.head = node;
@@ -23,7 +18,7 @@ class LinkedList {
         this.size++;
     }
     addAt(num, el) {
-        const node = new Node_js_1.default(el);
+        const node = new LinkedNode(el);
         let head = this.head;
         let index = 0;
         if (num > this.size)
@@ -71,7 +66,7 @@ class LinkedList {
         let count = 0;
         let currentNode = this.head;
         while (currentNode != null) {
-            if ((0, isEqual_js_1.default)(currentNode.value, el))
+            if (isEqual(currentNode.value, el))
                 return count;
             count++;
         }
@@ -90,5 +85,4 @@ class LinkedList {
         return arr;
     }
 }
-exports.default = LinkedList;
 //# sourceMappingURL=index.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"Node.js","sourceRoot":"","sources":["../../../src/LinkedList/Node.ts"],"names":[],"mappings":";;AAAA,MAAqB,UAAU;IAC7B,KAAK,CAAM;IACX,IAAI,CAAoB;IAExB,YAAY,KAAS;QACnB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CACF;AARD,6BAQC"}
+{"version":3,"file":"Node.js","sourceRoot":"","sources":["../../../src/LinkedList/Node.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,UAAU;IAC7B,KAAK,CAAM;IACX,IAAI,CAAoB;IAExB,YAAY,KAAS;QACnB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CACF"}

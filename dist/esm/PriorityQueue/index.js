@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const _top = 0;
 const _parent = (i) => ((i + 1) >>> 1) - 1;
 const _left = (i) => (i << 1) + 1;
 const _right = (i) => (i + 1) << 1;
-class PriorityQueue {
+export default class PriorityQueue {
     _heap;
     _comparator;
     _keyMap;
@@ -129,5 +127,4 @@ class PriorityQueue {
         }
     }
 }
-exports.default = PriorityQueue;
 //# sourceMappingURL=index.js.map

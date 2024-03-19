@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class LinkedNode {
+export default class LinkedNode {
     value;
     next;
     constructor(value) {
@@ -8,5 +6,4 @@ class LinkedNode {
         this.next = null;
     }
 }
-exports.default = LinkedNode;
 //# sourceMappingURL=Node.js.map

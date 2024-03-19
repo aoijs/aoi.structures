@@ -1,10 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.valueOf = void 0;
-function valueOf(data) {
+export function valueOf(data) {
     return data.valueOf ? data.valueOf() : Object.prototype.valueOf.call(data);
 }
-exports.valueOf = valueOf;
 function isEqual(a, b) {
     if (a === b)
         return true;
@@ -24,5 +20,5 @@ function isEqual(a, b) {
     }
     return false;
 }
-exports.default = isEqual;
+export default isEqual;
 //# sourceMappingURL=isEqual.js.map
