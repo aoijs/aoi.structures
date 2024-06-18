@@ -6,11 +6,11 @@
   "version": "1.0.0",
   "repository": {
     "type": "github",
-    "url": "https://github.com/AkaruiDevelopment/structures"
+    "url": "https://github.com/aoijs/aoi.structures"
   },
   "readme": "./README.md",
   "bugs": {
-    "url": "https://github.com/AkaruiDevelopment/structures/issues"
+    "url": "https://github.com/aoijs/aoi.structures/issues"
   },
   "description": "Abstract Data Structures That Make Storing data Much easy.",
   "license": "MIT",
